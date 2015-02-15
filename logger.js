@@ -27,7 +27,7 @@ angular.module('logger', []).
 								if (contextEnabled === undefined || contextEnabled) {
 									var modifiedArguments = [].slice.call(arguments);
 									if(sprintf)
-										modifiedArguments[0] = [sprintf(loggingPattern, moment().format("dddd h:mm:ss a"), context)] + modifiedArguments[0];
+										modifiedArguments.unshift(sprintf(loggingPattern, moment().format("dddd h:mm:ss a"), context));
 									loggingFunc.apply(null, modifiedArguments);
 								}
 							};
