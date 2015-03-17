@@ -26,9 +26,15 @@ angular.module('logger', []).
 								var contextEnabled = $log.enabledContexts[context];
 								if (contextEnabled === undefined || contextEnabled) {
 									var modifiedArguments = [].slice.call(arguments);
-									if(sprintf)
-										modifiedArguments.unshift(sprintf(loggingPattern, moment().format("dddd h:mm:ss a"), context));
-									loggingFunc.apply(null, modifiedArguments);
+									var output=[];
+									if(sprintf){
+										output.push(sprintf(loggingPattern, moment().format("dddd h:mm:ss a"), context));
+										if(modifiedArguments.length > 1) //format, arguments
+											output.push(vsprintf(modifiedArguments[0], modifiedArguments.slice(1)));
+										else 
+											output.push(modifiedArguments[0]);
+									}
+									loggingFunc.apply(null, output);
 								}
 							};
 						}
