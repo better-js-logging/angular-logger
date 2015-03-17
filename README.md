@@ -22,6 +22,7 @@ Allow define format and a variable number of arguments. The placeholders in the 
     * `s` — yields a string as is
     * `x` — yields an integer as a hexadecimal number (lower-case)
     * `X` — yields an integer as a hexadecimal number (upper-case)
+    
 See more at <a href="https://github.com/alexei/sprintf.js" target="_blank">sprintf.js</a>
     
 As example the angular $log:
