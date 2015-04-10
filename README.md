@@ -46,7 +46,7 @@ Based on original post of:
 <a href="http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/" target="_blank">Enhancing $log in AngularJs the simple way by Benny Bottema</a>
 
 ## Usage
-1. Include logger.js, nomentjs(https://github.com/moment/moment) and [sprintf.js](https://github.com/alexei/sprintf.js) in your JavaScript files.
+1. Include logger.js, [momentjs](https://github.com/moment/moment) and [sprintf.js](https://github.com/alexei/sprintf.js) in your JavaScript files.
 2. Add `logger` module as a dependency to your module:
 
     ```
