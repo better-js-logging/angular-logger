@@ -1,3 +1,4 @@
+/*global window*/
 (function (angular, sprintf, vsprintf, moment) {
     'use strict';
     angular.module('logger', []).
@@ -60,4 +61,4 @@
             logEnhancer.enhanceAngularLog($log);
         }
     ]);
-}());
+}(window.angular, window.sprintf, window.vsprintf, window.moment));
