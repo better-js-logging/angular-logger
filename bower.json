@@ -1,0 +1,31 @@
+{
+  "name": "angular-logger",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdorgambide/angular-logger.git"
+  },
+  "authors": [
+    "pdorgambide"
+  ],
+  "main": "logger.js",
+  "dependencies": {
+    "angular": "*",
+    "momentjs": "*",
+    "sprintf": "*"
+  },
+  "keywords": [
+    "angular",
+    "logger"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+  }
+}
