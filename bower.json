@@ -9,7 +9,7 @@
     "pdorgambide"
   ],
   "main": [
-      ./src/logger.js
+      "./src/logger.js"
   ],
   "dependencies": {
     "angular": "*",
