@@ -8,7 +8,9 @@
   "authors": [
     "pdorgambide"
   ],
-  "main": ./src/"logger.js",
+  "main": [
+      ./src/logger.js
+  ],
   "dependencies": {
     "angular": "*",
     "momentjs": "*",
