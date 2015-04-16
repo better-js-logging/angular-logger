@@ -2,7 +2,7 @@
 > Enhanced $log in AngularJS
 
 ## Getting Started
-Enhance the $log service with the definition of one logger by context that prepend the output with context and  date/hour information. 
+Enhance the $log service with the definition of one logger by context that prepend the output with context and  date/hour information.
 Allow define format and a variable number of arguments. The placeholders in the format string are marked by % and are followed by one or more of these elements:
 * An optional number followed by a `$` sign that selects which argument index to use for the value. If not specified, arguments will be placed in the same order as the placeholders in the input string.
 * An optional `+` sign that forces to preceed the result with a plus or minus sign on numeric values. By default, only the `-` sign is used on negative numbers.
@@ -22,9 +22,9 @@ Allow define format and a variable number of arguments. The placeholders in the 
     * `s` — yields a string as is
     * `x` — yields an integer as a hexadecimal number (lower-case)
     * `X` — yields an integer as a hexadecimal number (upper-case)
-    
+
 See more at <a href="https://github.com/alexei/sprintf.js" target="_blank">sprintf.js</a>
-    
+
 As example the angular $log:
 ```
 $log.debug ("Could't UPDATE resource "+resource.name+". Error: "+error.message+". Try again in "+delaySeconds+" seconds.")
@@ -42,25 +42,18 @@ Output: Sunday 12:13:06 pm::[SomeContext]> > Could't UPDATE resource ADDRESS. Er
 
  ```
 
-Based on original post of: 
+Based on original post of:
 <a href="http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/" target="_blank">Enhancing $log in AngularJs the simple way by Benny Bottema</a>
 
 ## Usage
-1. Include logger.js and [sprintf.js](https://github.com/alexei/sprintf.js) in your JavaScript files.
+1. Include logger.js, [momentjs](https://github.com/moment/moment) and [sprintf.js](https://github.com/alexei/sprintf.js) in your JavaScript files.
 2. Add `logger` module as a dependency to your module:
 
     ```
     angular.module('YourModule', ['logger'])
     ```
 
-3. Make a configuration block that turns on or off logging:
-    ```
-      module. config(['logEnhancerProvider', function (logEnhancerProvider) {
-							    logEnhancerProvider.loggingPattern = '%s::[%s]> ';
-			}])
-    }]);
-    ```
-4. Start logging with context info.
+2. Start logging with context info.
     ```
     app.controller('LogTestCtrl', function ($log) {
     var notMutedLogger = $log.getInstance('Not Muted');
@@ -74,7 +67,7 @@ Based on original post of:
     }
 });
 	```
-	
+
 ##Future work
 Some usefull enhanced points (suggestions will be wellcome):
 * Configure logger levels by context regexp as <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/logging/overview.html" target="_blank">Java logger API </a> does. The level's order are the following:
@@ -86,7 +79,7 @@ Some usefull enhanced points (suggestions will be wellcome):
   5. OFF  : Disable all levels.
 ```
 
-Example:  
+Example:
    ```
   logLevels.add('*', WARN);                               //All context enabled WARING (ERROR E
   logLevels.add('somecontext.developcontext.*', DEBUG);  //Debug on developcontext and subcontext.
