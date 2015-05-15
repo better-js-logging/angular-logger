@@ -61,9 +61,7 @@
 	                        	prefix = dateStr + '::[' + context + ']> ';
 	                        }
 	                        
-							var modifiedArguments = [].slice.call(args);
-							modifiedArguments.unshift(prefix);
-							return modifiedArguments;
+							return [prefix].concat([].slice.call(args));
 						}
 					}
                     
