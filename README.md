@@ -35,11 +35,10 @@ Output: Could't UPDATE resource ADDRESS. Error: ROAD NOT LOCATED. Try again in 5
 
 With logger alternative:
  ```
- var logger = $log.getInstance("SomeContext");
+var logger = $log.getInstance("SomeContext");
 logger.debug("Could't UPDATE resource %s. Error: %s. Try again in %d seconds.", resource.name, error.message, delaySeconds)
 --------
 Output: Sunday 12:13:06 pm::[SomeContext]> > Could't UPDATE resource ADDRESS. Error: ROAD NOT LOCATED. Try again in 5 seconds.
-
  ```
 
 Based on original post of:
@@ -56,17 +55,17 @@ Based on original post of:
 2. Start logging with context info.
     ```
     app.controller('LogTestCtrl', function ($log) {
-    var notMutedLogger = $log.getInstance('Not Muted');
-    var mutedLogger = $log.getInstance('Muted');
+       var notMutedLogger = $log.getInstance('Not Muted');
+       var mutedLogger = $log.getInstance('Muted');
 
-    mutedLogger.enableLogging(false);
+       mutedLogger.enableLogging(false);
 
-    this.doTest = function () {
-        notMutedLogger.info("This *will* appear in your console");
-        mutedLogger.info("This will *not* appear in your console");
-    }
-});
-	```
+       this.doTest = function () {
+          notMutedLogger.info("This *will* appear in your console");
+          mutedLogger.info("This will *not* appear in your console");
+       }
+    });
+    ```
 
 ##Future work
 Some usefull enhanced points (suggestions will be wellcome):
