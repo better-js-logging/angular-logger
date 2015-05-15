@@ -46,25 +46,24 @@ Based on original post of:
 1. Include logger.js, [momentjs](https://github.com/moment/moment) and [sprintf.js](https://github.com/alexei/sprintf.js) in your JavaScript files.
 2. Add `logger` module as a dependency to your module:
 
- ```javascript
- angular.module('YourModule', ['logger'])
- ```
+   ```javascript
+   angular.module('YourModule', ['logger'])
+   ```
+3. Start logging with context info.
 
-2. Start logging with context info.
-
-```javascript
-app.controller('LogTestCtrl', function ($log) {
-   var notMutedLogger = $log.getInstance('Not Muted');
-   var mutedLogger = $log.getInstance('Muted');
-
-   mutedLogger.enableLogging(false);
-
-   this.doTest = function () {
-      notMutedLogger.info("This *will* appear in your console");
-      mutedLogger.info("This will *not* appear in your console");
-   }
-});
-```
+   ```javascript
+   app.controller('LogTestCtrl', function ($log) {
+      var notMutedLogger = $log.getInstance('Not Muted');
+      var mutedLogger = $log.getInstance('Muted');
+   
+      mutedLogger.enableLogging(false);
+   
+      this.doTest = function () {
+         notMutedLogger.info("This *will* appear in your console");
+         mutedLogger.info("This will *not* appear in your console");
+      }
+   });
+   ```
 
 ##Future work
 Some usefull enhanced points (suggestions will be wellcome):
