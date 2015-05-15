@@ -9,6 +9,7 @@
         this.logLevels = {'*': this.LEVEL.TRACE}; // everything by everyone should be visible by default
 		
 		this.$get = function() {
+			var enabledContexts = [];
 			var loggingPattern = this.loggingPattern;
 			var LEVEL = this.LEVEL;
 			var logLevels = this.logLevels;
@@ -16,24 +17,25 @@
                 
                 // Actually modifies $log. Without calling this in the run phase, $log remains untouched
 				enhanceAngularLog : function($log) {
-					$log.enabledContexts = [];
+					$log.LEVEL = LEVEL; // assign to $log, so the user can change them after config phase
+					$log.logLevels = logLevels; // assign to $log, so the user can change them after config phase
 					
 					$log.getInstance = function(context) {
 						return {
-							log	: enhanceLogging($log.log, LEVEL.INFO, context, loggingPattern),
-							info	: enhanceLogging($log.info, LEVEL.INFO, context, loggingPattern),
-							warn	: enhanceLogging($log.warn, LEVEL.WARN, context, loggingPattern),
-							debug	: enhanceLogging($log.debug, LEVEL.DEBUG, context, loggingPattern),
-							error	: enhanceLogging($log.error, LEVEL.ERROR, context, loggingPattern),
+							log	: enhanceLogging($log.log, $log.LEVEL.INFO, context, loggingPattern),
+							info	: enhanceLogging($log.info, $log.LEVEL.INFO, context, loggingPattern),
+							warn	: enhanceLogging($log.warn, $log.LEVEL.WARN, context, loggingPattern),
+							debug	: enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, loggingPattern),
+							error	: enhanceLogging($log.error, $log.LEVEL.ERROR, context, loggingPattern),
 							enableLogging : function(enable) {
-								$log.enabledContexts[context] = enable;
+								enabledContexts[context] = enable;
 							}
 						};
 					};
 					
 					function enhanceLogging(loggingFunc, level, context, loggingPattern) {
 						return function() {
-							var contextEnabled = $log.enabledContexts[context];
+							var contextEnabled = enabledContexts[context];
 							if (contextEnabled === undefined || contextEnabled) {
                                 if (levelPassesThreshold(context, level)) {
 	                                loggingFunc.apply(null, enhanceLogline(arguments, context, loggingPattern));
@@ -69,12 +71,12 @@
                         return level <= getLogLevelThreshold(context);
                     
                         function getLogLevelThreshold(context) {
-                            if (logLevels[context]) {
-                                return logLevels[context];
+                            if ($log.logLevels[context]) {
+                                return $log.logLevels[context];
                             } else if (context.indexOf('.') != -1) {
                                 return getLogLevelThreshold(context.substring(0, context.lastIndexOf('.')));
                             } else {
-                                return logLevels['*'];
+                                return $log.logLevels['*'];
                             }
                         }
                     }
