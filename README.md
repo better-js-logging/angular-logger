@@ -56,7 +56,7 @@ Based on original post of:
       var notMutedLogger = $log.getInstance('Not Muted');
       var mutedLogger = $log.getInstance('Muted');
    
-      mutedLogger.enableLogging(false);
+      $log.logLevels['Muted'] = $log.LEVEL.OFF;
    
       this.doTest = function () {
          notMutedLogger.info("This *will* appear in your console");
@@ -64,23 +64,60 @@ Based on original post of:
       }
    });
    ```
+   ([jsFiddle](http://jsfiddle.net/plantface/d7qkaumr/))
 
-##Future work
-Some usefull enhanced points (suggestions will be wellcome):
-* Configure logger levels by context regexp as <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/logging/overview.html" target="_blank">Java logger API </a> does. The level's order are the following:
-```
-  1. DEBUG: Show debug messages and the lower levels, is the  finest output and only recommended to develop stages.
-  2. INFO :  Show info messages and lower, i.e: INFO, WARN and ERROR.
-  3. WARN :  Show warn messages and lower, i.e: WARN and ERROR.
-  4. ERROR: Show only error messages.
-  5. OFF  : Disable all levels.
-```
+## Managing logging priority
 
+The following logging functions are available:
+
+logger.           | mapped to $log. | with logLevel
+----------------- | --------------- | --------------
+_`trace`_         | _`debug`_       | `TRACE`
+_`debug`_         | _`debug`_       | `DEBUG`
+_`log`_           | _`log*`_        | `INFO`
+_`info`_          | _`info`_        | `INFO`
+_`warn`_          | _`warn`_        | `WARN`
+_`error`_         | _`error`_       | `ERROR`
+`*` maintained for backwards compatibility with `$log.log`
+
+The level's order are the following:
+```
+  1. TRACE: displays all levels, is the finest output and only recommended during debugging
+  2. DEBUG: display all but the finest logs, only recommended during develop stages
+  3. INFO :  Show info, warn and error messages
+  4. WARN :  Show warn and error messages
+  5. ERROR: Show only error messages.
+  6. OFF  : Disable all logging, recommended for silencing noisy logging during debugging. *will* surpress errors logging.
+```
 Example:
-   ```
-  logLevels.add('*', WARN);                               //All context enabled WARING (ERROR E
-  logLevels.add('somecontext.developcontext.*', DEBUG);  //Debug on developcontext and subcontext.
-  logLevels.add('somecontext.stablecontext.*', OFF);    // Disable log on the real stable context and subcontext.
-   ```
 
-Copyright (c) 2015 pdorgambide
+```javascript
+// config log levels before the application wakes up
+app.config(function (logEnhancerProvider) {
+    logEnhancerProvider.loggingPattern = '%s::[%s]> ';
+    logEnhancerProvider.logLevels = {
+        'a.b.c': logEnhancerProvider.LEVEL.TRACE, // trace + debug + info + warn + error
+        'a.b.d': logEnhancerProvider.LEVEL.ERROR, // error
+        'a.b': logEnhancerProvider.LEVEL.DEBUG, // debug + info + warn + error
+        'a': logEnhancerProvider.LEVEL.WARN, // warn + error
+        '*': logEnhancerProvider.LEVEL.INFO // info + warn + error
+    };
+});
+
+
+// config log levels after the application started running
+run(function ($log) {
+    $log.logLevels = {
+        'a.b.c': $log.LEVEL.TRACE, // trace + debug + info + warn + error
+        'a.b.d': $log.LEVEL.ERROR, // error
+        'a.b': $log.LEVEL.DEBUG, // debug + info + warn + error
+        'a': $log.LEVEL.WARN, // warn + error
+        '*': $log.LEVEL.INFO // info + warn + error
+    };
+});
+
+/* alternative notation:
+   $log.logLevels['a.b.c'] = $log.LEVEL.TRACE;
+   $log.logLevels['a.b.d'] = $log.LEVEL.ERROR;
+   etc. */
+```
