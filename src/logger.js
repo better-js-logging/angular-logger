@@ -9,7 +9,6 @@
         this.logLevels = {'*': this.LEVEL.TRACE}; // everything by everyone should be visible by default
 		
 		this.$get = function() {
-			var enabledContexts = [];
 			var loggingPattern = this.loggingPattern;
 			var LEVEL = this.LEVEL;
 			var logLevels = this.logLevels;
@@ -26,20 +25,14 @@
 							info	: enhanceLogging($log.info, $log.LEVEL.INFO, context, loggingPattern),
 							warn	: enhanceLogging($log.warn, $log.LEVEL.WARN, context, loggingPattern),
 							debug	: enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, loggingPattern),
-							error	: enhanceLogging($log.error, $log.LEVEL.ERROR, context, loggingPattern),
-							enableLogging : function(enable) {
-								enabledContexts[context] = enable;
-							}
+							error	: enhanceLogging($log.error, $log.LEVEL.ERROR, context, loggingPattern)
 						};
 					};
 					
 					function enhanceLogging(loggingFunc, level, context, loggingPattern) {
 						return function() {
-							var contextEnabled = enabledContexts[context];
-							if (contextEnabled === undefined || contextEnabled) {
-                                if (levelPassesThreshold(context, level)) {
-	                                loggingFunc.apply(null, enhanceLogline(arguments, context, loggingPattern));
-                                }
+                            if (levelPassesThreshold(context, level)) {
+                                loggingFunc.apply(null, enhanceLogline(arguments, context, loggingPattern));
                             }
 						};
 					
