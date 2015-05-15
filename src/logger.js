@@ -5,7 +5,7 @@
 	angular.module('logger', []).
 	provider('logEnhancer', function() {
         this.loggingPattern = '%s - %s: '; // default logging pattern, overwrite in config phase
-        this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0 }; // with these configure loglevels in config fase
+        this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 }; // with these configure loglevels in config fase
         this.logLevels = {'*': this.LEVEL.TRACE}; // everything by everyone should be visible by default
 		
 		this.$get = function() {
@@ -66,7 +66,7 @@
 					}
                     
                     function levelPassesThreshold(context, level) {
-                        return level <= getLogLevelThreshold(context);
+                        return level > $log.LEVEL.OFF && level <= getLogLevelThreshold(context);
                     
                         function getLogLevelThreshold(context) {
                             if ($log.logLevels[context]) {
