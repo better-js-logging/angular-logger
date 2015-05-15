@@ -21,10 +21,11 @@
 					
 					$log.getInstance = function(context) {
 						return {
-							log	: enhanceLogging($log.log, $log.LEVEL.INFO, context, loggingPattern),
+							trace	: enhanceLogging($log.debug, $log.LEVEL.TRACE, context, loggingPattern),
+							debug	: enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, loggingPattern),
+							log		: enhanceLogging($log.log, $log.LEVEL.INFO, context, loggingPattern),
 							info	: enhanceLogging($log.info, $log.LEVEL.INFO, context, loggingPattern),
 							warn	: enhanceLogging($log.warn, $log.LEVEL.WARN, context, loggingPattern),
-							debug	: enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, loggingPattern),
 							error	: enhanceLogging($log.error, $log.LEVEL.ERROR, context, loggingPattern)
 						};
 					};
