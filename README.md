@@ -80,7 +80,7 @@ _`log`_           | _`log*`_        | `INFO`
 _`info`_          | _`info`_        | `INFO`
 _`warn`_          | _`warn`_        | `WARN`
 _`error`_         | _`error`_       | `ERROR`
-* maintained for backwards compatibility with `$log.log`
+`*` maintained for backwards compatibility with `$log.log`
 
 The level's order are the following:
 ```
