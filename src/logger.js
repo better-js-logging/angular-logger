@@ -69,7 +69,7 @@
                         return level > $log.LEVEL.OFF && level <= getLogLevelThreshold(context);
                     
                         function getLogLevelThreshold(context) {
-                            if ($log.logLevels[context]) {
+                            if ($log.logLevels[context] != null) {
                                 return $log.logLevels[context];
                             } else if (context.indexOf('.') != -1) {
                                 return getLogLevelThreshold(context.substring(0, context.lastIndexOf('.')));
