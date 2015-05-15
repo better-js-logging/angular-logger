@@ -56,7 +56,7 @@ Based on original post of:
       var notMutedLogger = $log.getInstance('Not Muted');
       var mutedLogger = $log.getInstance('Muted');
    
-      mutedLogger.enableLogging(false);
+      $log.logLevels['Muted'] = $log.LEVEL.OFF;
    
       this.doTest = function () {
          notMutedLogger.info("This *will* appear in your console");
@@ -64,6 +64,7 @@ Based on original post of:
       }
    });
    ```
+   ([jsFiddle](http://jsfiddle.net/plantface/d7qkaumr/))
 
 ##Future work
 Some usefull enhanced points (suggestions will be wellcome):
