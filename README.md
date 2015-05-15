@@ -26,19 +26,17 @@ Allow define format and a variable number of arguments. The placeholders in the 
 See more at <a href="https://github.com/alexei/sprintf.js" target="_blank">sprintf.js</a>
 
 As example the angular $log:
-```
+```javascript
 $log.debug ("Could't UPDATE resource "+resource.name+". Error: "+error.message+". Try again in "+delaySeconds+" seconds.")
--------------
-Output: Could't UPDATE resource ADDRESS. Error: ROAD NOT LOCATED. Try again in 5 seconds.
+// Could't UPDATE resource ADDRESS. Error: ROAD NOT LOCATED. Try again in 5 seconds.
 ```
 
 
 With logger alternative:
- ```
+ ```javascript
 var logger = $log.getInstance("SomeContext");
 logger.debug("Could't UPDATE resource %s. Error: %s. Try again in %d seconds.", resource.name, error.message, delaySeconds)
---------
-Output: Sunday 12:13:06 pm::[SomeContext]> > Could't UPDATE resource ADDRESS. Error: ROAD NOT LOCATED. Try again in 5 seconds.
+// Sunday 12:13:06 pm::[SomeContext]> > Could't UPDATE resource ADDRESS. Error: ROAD NOT LOCATED. Try again in 5 seconds.
  ```
 
 Based on original post of:
@@ -48,24 +46,25 @@ Based on original post of:
 1. Include logger.js, [momentjs](https://github.com/moment/moment) and [sprintf.js](https://github.com/alexei/sprintf.js) in your JavaScript files.
 2. Add `logger` module as a dependency to your module:
 
-    ```
-    angular.module('YourModule', ['logger'])
-    ```
+ ```javascript
+ angular.module('YourModule', ['logger'])
+ ```
 
 2. Start logging with context info.
-    ```
-    app.controller('LogTestCtrl', function ($log) {
-       var notMutedLogger = $log.getInstance('Not Muted');
-       var mutedLogger = $log.getInstance('Muted');
 
-       mutedLogger.enableLogging(false);
+```javascript
+app.controller('LogTestCtrl', function ($log) {
+   var notMutedLogger = $log.getInstance('Not Muted');
+   var mutedLogger = $log.getInstance('Muted');
 
-       this.doTest = function () {
-          notMutedLogger.info("This *will* appear in your console");
-          mutedLogger.info("This will *not* appear in your console");
-       }
-    });
-    ```
+   mutedLogger.enableLogging(false);
+
+   this.doTest = function () {
+      notMutedLogger.info("This *will* appear in your console");
+      mutedLogger.info("This will *not* appear in your console");
+   }
+});
+```
 
 ##Future work
 Some usefull enhanced points (suggestions will be wellcome):
