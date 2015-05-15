@@ -70,8 +70,6 @@ Based on original post of:
 
 The following logging functions are available:
 
-`trace`
-
 logger.           | mapped to $log. | with logLevel
 ----------------- | --------------- | --------------
 _`trace`_         | _`debug`_       | `TRACE`
