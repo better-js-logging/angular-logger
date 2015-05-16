@@ -1,7 +1,7 @@
 #angular-logger
 > Enhanced $log in AngularJS
 
-* Enhances Angular's `$log` service so that you can define **separate _contexts_ to log for**, where the output will be prepended with the context's name and a datetime stamp.
+* Enhances Angular's `$log` service so that you can define **separate contexts to log for**, where the output will be prepended with the context's name and a datetime stamp.
 * Furthermore enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
 * Enhances `$log` even further by introducing **log levels**, where you can manage logging output per context or even a group of contexts
 * Works as a **complete drop-in** replacement for your current `$log.log` or `console.log` statements
