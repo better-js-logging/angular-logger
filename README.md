@@ -10,10 +10,34 @@ Based on original post of:
 * Enhances `$log` even further by introducing **log levels**, where you can manage logging output per context or even a group of contexts
 * Works as a **complete drop-in** replacement for your current console log statements
 
+## Usage
+1. Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app. Momentjs and sprintf are both optional: without moment you can't pattern a nicely readable datetime stamp and without sprintf you can't pattern your logging input lines.
+2. Add `logger` module as a dependency to your module:
+
+   ```javascript
+   angular.module('YourModule', ['logger'])
+   ```
+3. Start logging for your context
+
+   ```javascript
+   app.controller('LogTestCtrl', function ($log) {
+      var notMutedLogger = $log.getInstance('Not Muted');
+      var mutedLogger = $log.getInstance('Muted');
+   
+      $log.logLevels['Muted'] = $log.LEVEL.OFF;
+   
+      this.doTest = function () {
+         notMutedLogger.info("This *will* appear in your console");
+         mutedLogger.info("This will *not* appear in your console");
+      }
+   });
+   ```
+   ([jsFiddle](http://jsfiddle.net/plantface/d7qkaumr/))
+
 ## Applying Patterns
 ### Datetime stamp patterns
 Will be implemented under [issue #14](https://github.com/pdorgambide/angular-logger/issues/14). For pattern config, please refer to [momentjs' documentation on parsing moment dates](http://momentjs.com/docs/#/displaying/).
-### Logging patternd
+### Logging patterns
 The placeholders in the format string are marked by % and are followed by one or more of these elements:
 * An optional number followed by a `$` sign that selects which argument index to use for the value. If not specified, arguments will be placed in the same order as the placeholders in the input string.
 * An optional `+` sign that forces to preceed the result with a plus or minus sign on numeric values. By default, only the `-` sign is used on negative numbers.
@@ -57,30 +81,6 @@ logger.warn("This %s pattern %j", "is", "{ 'in': 'put' }", "but this is not!", [
  ```
 
 [working demo](https://jsfiddle.net/plantface/qkobLe0m/)
-
-## Usage
-1. Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app. Momentjs and sprintf are both optional: without moment you can't pattern a nicely readable datetime stamp and without sprintf you can't pattern your logging input lines.
-2. Add `logger` module as a dependency to your module:
-
-   ```javascript
-   angular.module('YourModule', ['logger'])
-   ```
-3. Start logging for your context
-
-   ```javascript
-   app.controller('LogTestCtrl', function ($log) {
-      var notMutedLogger = $log.getInstance('Not Muted');
-      var mutedLogger = $log.getInstance('Muted');
-   
-      $log.logLevels['Muted'] = $log.LEVEL.OFF;
-   
-      this.doTest = function () {
-         notMutedLogger.info("This *will* appear in your console");
-         mutedLogger.info("This will *not* appear in your console");
-      }
-   });
-   ```
-   ([jsFiddle](http://jsfiddle.net/plantface/d7qkaumr/))
 
 ## Managing logging priority
 
