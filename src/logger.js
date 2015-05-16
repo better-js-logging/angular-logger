@@ -78,6 +78,10 @@
 			};
 		};
 	}).
+	/*
+		Default config and example config as well.
+		Overrides default logging pattern and global logLevel
+	*/
     config(['logEnhancerProvider',
         function (logEnhancerProvider) {
             logEnhancerProvider.loggingPattern = '%s::[%s]> ';
