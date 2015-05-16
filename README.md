@@ -1,23 +1,34 @@
 #angular-logger
 > Enhanced $log in AngularJS
 
-Based on original post of:
-<a href="http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/" target="_blank">Enhancing $log in AngularJs the simple way by Benny Bottema</a>
-
-## Getting Started
 * Enhances Angular's `$log` service so that you can define **separate _contexts_ to log for**, where the output will be prepended with the context's name and a datetime stamp.
 * Furthermore enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
 * Enhances `$log` even further by introducing **log levels**, where you can manage logging output per context or even a group of contexts
 * Works as a **complete drop-in** replacement for your current `$log.log` or `console.log` statements
 
-## Usage
-1. Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app. Momentjs and sprintf are both optional: without moment you can't pattern a nicely readable datetime stamp and without sprintf you can't pattern your logging input lines.
-2. Add `logger` module as a dependency to your module:
+Based on original post of:
+<a href="http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/" target="_blank">Enhancing $log in AngularJs the simple way by Benny Bottema</a>
+
+## Installing
+
+angular-logger has optional dependencies on _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_: without moment you can't pattern a nicely readable datetime stamp and without sprintf you can't pattern your logging input lines.
+
+### Bower
+
+Will be implemented under [issue #10](https://github.com/pdorgambide/angular-logger/issues/10)
+
+### Manually
+
+Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app.
+
+## Getting Started
+
+1. Add `logger` module as a dependency to your module:
 
    ```javascript
    angular.module('YourModule', ['logger'])
    ```
-3. Start logging for your context
+2. Start logging for your context
 
    ```javascript
    app.controller('LogTestCtrl', function ($log) {
