@@ -11,8 +11,9 @@ Based on original post of:
 * Works as a **complete drop-in** replacement for your current console log statements
 
 ## Applying Patterns
-### datetime stamp patterns
-### Logging pattern
+### Datetime stamp patterns
+Will be implemented under [issue #14](https://github.com/pdorgambide/angular-logger/issues/14). For pattern config, please refer to [momentjs' documentation on parsing moment dates](http://momentjs.com/docs/#/displaying/).
+### Logging patternd
 The placeholders in the format string are marked by % and are followed by one or more of these elements:
 * An optional number followed by a `$` sign that selects which argument index to use for the value. If not specified, arguments will be placed in the same order as the placeholders in the input string.
 * An optional `+` sign that forces to preceed the result with a plus or minus sign on numeric values. By default, only the `-` sign is used on negative numbers.
