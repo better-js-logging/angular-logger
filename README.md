@@ -1,5 +1,4 @@
 #angular-logger
-> Enhanced $log in AngularJS
 
 * Enhances Angular's `$log` service so that you can define **separate contexts to log for**, where the output will be prepended with the context's name and a datetime stamp.
 * Further enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
