@@ -13,11 +13,11 @@ Based on original post of:
 
 angular-logger has optional dependencies on _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_: without moment you can't pattern a nicely readable datetime stamp and without sprintf you can't pattern your logging input lines. Default fixed patterns are applied if either they are missing.
 
-### Bower
+#### Bower
 
 Will be implemented under [issue #10](https://github.com/pdorgambide/angular-logger/issues/10)
 
-### Manually
+#### Manually
 
 Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app.
 
@@ -46,7 +46,25 @@ Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprint
    ([jsFiddle](http://jsfiddle.net/plantface/d7qkaumr/))
 
 ## Applying Patterns
-### Datetime stamp patterns
+#### Prefix pattern
+By default, the prefix is formatted like so:
+
+`datetime here::[context's name here]>your logging input here`
+
+However, you can change this as follows:
+
+```javascript
+app.config(function (logEnhancerProvider) {
+   logEnhancerProvider.loggingPattern = '%s - %s: ';
+});
+app.run(function($log) {
+   $log.getInstance('app').info('Hello World');
+});
+// was:    Sunday 12:55:07 am::[app]>Hello World
+// became: Sunday 12:55:07 am - app: Hello World
+```
+
+#### Datetime stamp patterns
 
 The default pattern is `dddd h:mm:ss a`, which translates to _Sunday 12:55:07 am_. You customize the pattern as follows:
 
@@ -57,15 +75,15 @@ app.config(function (logEnhancerProvider) {
 app.run(function($log) {
    $log.getInstance('app').info('Hello World');
 });
-// was: Sunday 12:55:07 am::['app']>Hello World
-// became: Sunday::['app']>Hello World
+// was:    Sunday 12:55:07 am::[app]>Hello World
+// became: Sunday::[app]>Hello World
 ```
 
 **For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)**
 
 Will be implemented under [issue #14](https://github.com/pdorgambide/angular-logger/issues/14)
 
-### Logging patterns
+#### Logging patterns
 
 If you have included _sprintf.js_ in your webapp, you can start using patterns with _angular-logger_.
 
