@@ -47,7 +47,7 @@
 		                                return getLogLevelThreshold(context.substring(0, context.lastIndexOf('.')));
 		                            }
 	                        	}
-	                        	return $log.logLevels['*'];
+	                        	return $log.logLevels['*'] !== undefined ? $log.logLevels['*'] : $log.LEVEL.TRACE;
 	                        }
 	                    }
 
