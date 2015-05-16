@@ -8,7 +8,7 @@ Based on original post of:
 * Enhances Angular's `$log` service so that you can define **separate _contexts_ to log for**, where the output will be prepended with the context's name and a datetime stamp.
 * Furthermore enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
 * Enhances `$log` even further by introducing **log levels**, where you can manage logging output per context or even a group of contexts
-* Works as a **complete drop-in** replacement for your current console log statements
+* Works as a **complete drop-in** replacement for your current `$log` and `console.log` statements
 
 ## Usage
 1. Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app. Momentjs and sprintf are both optional: without moment you can't pattern a nicely readable datetime stamp and without sprintf you can't pattern your logging input lines.
@@ -95,7 +95,7 @@ logger.           | mapped to $log. | with logLevel
 ----------------- | --------------- | --------------
 _`trace`_         | _`debug`_       | `TRACE`
 _`debug`_         | _`debug`_       | `DEBUG`
-_`log`_           | _`log*`_        | `INFO`
+_`log*`_           | _`log`_        | `INFO`
 _`info`_          | _`info`_        | `INFO`
 _`warn`_          | _`warn`_        | `WARN`
 _`error`_         | _`error`_       | `ERROR`
