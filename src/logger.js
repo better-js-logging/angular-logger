@@ -1,43 +1,62 @@
 /*global window*/
 (function (angular, sprintf, vsprintf, moment) {
 	'use strict';
-	
+
 	angular.module('logger', []).
 	provider('logEnhancer', function() {
+		var provider = this;
+
         this.loggingPattern = '%s - %s: '; // default logging pattern, overwrite in config phase
         this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 }; // with these configure loglevels in config fase
         this.logLevels = {'*': this.LEVEL.TRACE}; // everything by everyone should be visible by default
-		
+
 		this.$get = function() {
-			var loggingPattern = this.loggingPattern;
-			var LEVEL = this.LEVEL;
-			var logLevels = this.logLevels;
 			return {
-                
+
                 // Actually modifies $log. Without calling this in the run phase, $log remains untouched
 				enhanceAngularLog : function($log) {
-					$log.LEVEL = LEVEL; // assign to $log, so the user can change them after config phase
-					$log.logLevels = logLevels; // assign to $log, so the user can change them after config phase
-					
+					$log.LEVEL = provider.LEVEL; // assign to $log, so the user can change them after config phase
+					$log.logLevels = provider.logLevels; // assign to $log, so the user can change them after config phase
+
 					$log.getInstance = function(context) {
 						return {
-							trace	: enhanceLogging($log.debug, $log.LEVEL.TRACE, context, loggingPattern),
-							debug	: enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, loggingPattern),
-							log		: enhanceLogging($log.log, $log.LEVEL.INFO, context, loggingPattern),
-							info	: enhanceLogging($log.info, $log.LEVEL.INFO, context, loggingPattern),
-							warn	: enhanceLogging($log.warn, $log.LEVEL.WARN, context, loggingPattern),
-							error	: enhanceLogging($log.error, $log.LEVEL.ERROR, context, loggingPattern)
+							trace	: enhanceLogging($log.debug, $log.LEVEL.TRACE, context, provider.loggingPattern),
+							debug	: enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, provider.loggingPattern),
+							log		: enhanceLogging($log.log, $log.LEVEL.INFO, context, provider.loggingPattern),
+							info	: enhanceLogging($log.info, $log.LEVEL.INFO, context, provider.loggingPattern),
+							warn	: enhanceLogging($log.warn, $log.LEVEL.WARN, context, provider.loggingPattern),
+							error	: enhanceLogging($log.error, $log.LEVEL.ERROR, context, provider.loggingPattern)
 						};
 					};
-					
+
 					function enhanceLogging(loggingFunc, level, context, loggingPattern) {
 						return function() {
                             if (levelPassesThreshold(context, level)) {
                                 loggingFunc.apply(null, enhanceLogline(arguments, context, loggingPattern));
                             }
 						};
-					
+
+	                    function levelPassesThreshold(context, level) {
+	                        return level > $log.LEVEL.OFF && level <= getLogLevelThreshold(context);
+
+	                        function getLogLevelThreshold(context) {
+	                        	if (context) {
+		                            if ($log.logLevels[context] !== undefined) {
+		                                return $log.logLevels[context];
+		                            } else if (context.indexOf('.') != -1) {
+		                                return getLogLevelThreshold(context.substring(0, context.lastIndexOf('.')));
+		                            }
+	                        	}
+	                        	return $log.logLevels['*'];
+	                        }
+	                    }
+
 						function enhanceLogline(args, context, loggingPattern) {
+	                        var prefix = generatePrefix(context, loggingPattern);
+							return [prefix].concat([].slice.call(args));
+						}
+
+						function generatePrefix(context, loggingPattern) {
 							var dateStr = '';
 	                        if (moment) {
 	                            dateStr = moment().format("dddd h:mm:ss a");
@@ -46,33 +65,15 @@
 	                            var timeStr = new Date().toTimeString().match( /^([0-9]{2}:[0-9]{2}:[0-9]{2})/ )[0];
 	                            dateStr = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + timeStr;
 	                        }
-							
-							var prefix = '';
+
 	                        if (sprintf) {
-	                        	prefix = sprintf(loggingPattern, dateStr, context);
+	                        	return sprintf(loggingPattern, dateStr, context);
 	                        } else {
 	                        	// use fixed layout: '%s::[%s]> '
-	                        	prefix = dateStr + '::[' + context + ']> ';
+	                        	return dateStr + '::[' + context + ']> ';
 	                        }
-	                        
-							return [prefix].concat([].slice.call(args));
 						}
 					}
-                    
-                    function levelPassesThreshold(context, level) {
-                        return level > $log.LEVEL.OFF && level <= getLogLevelThreshold(context);
-                    
-                        function getLogLevelThreshold(context) {
-                        	if (context) {
-	                            if ($log.logLevels[context] !== undefined) {
-	                                return $log.logLevels[context];
-	                            } else if (context.indexOf('.') != -1) {
-	                                return getLogLevelThreshold(context.substring(0, context.lastIndexOf('.')));
-	                            }
-                        	}
-                        	return $log.logLevels['*'];
-                        }
-                    }
 				}
 			};
 		};
