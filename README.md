@@ -43,7 +43,7 @@ Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprint
       }
    });
    ```
-   ([jsFiddle](http://jsfiddle.net/plantface/d7qkaumr/))
+   [working demo](http://jsfiddle.net/plantface/d7qkaumr/)
 
 ## Applying Patterns
 #### Prefix pattern
@@ -80,8 +80,6 @@ app.run(function($log) {
 ```
 
 **For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)**
-
-Will be implemented under [issue #14](https://github.com/pdorgambide/angular-logger/issues/14)
 
 #### Logging patterns
 
