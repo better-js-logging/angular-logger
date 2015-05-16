@@ -154,9 +154,12 @@ run(function ($log) {
         '*': $log.LEVEL.INFO // info + warn + error
     };
 });
+```
 
-/* alternative notation:
-   $log.logLevels['a.b.c'] = $log.LEVEL.TRACE;
-   $log.logLevels['a.b.d'] = $log.LEVEL.ERROR;
-   etc. */
+Alternative notation:
+
+```javascript
+$log.logLevels['a.b.c'] = $log.LEVEL.TRACE;
+$log.logLevels['a.b.d'] = $log.LEVEL.ERROR;
+// etc.
 ```
