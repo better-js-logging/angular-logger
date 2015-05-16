@@ -38,6 +38,9 @@ Based on original post of:
 ### Datetime stamp patterns
 Will be implemented under [issue #14](https://github.com/pdorgambide/angular-logger/issues/14). For pattern config, please refer to [momentjs' documentation on parsing moment dates](http://momentjs.com/docs/#/displaying/).
 ### Logging patterns
+
+**For all options, see [sprintf.js](https://github.com/alexei/sprintf.js)**
+
 The placeholders in the format string are marked by % and are followed by one or more of these elements:
 * An optional number followed by a `$` sign that selects which argument index to use for the value. If not specified, arguments will be placed in the same order as the placeholders in the input string.
 * An optional `+` sign that forces to preceed the result with a plus or minus sign on numeric values. By default, only the `-` sign is used on negative numbers.
@@ -57,8 +60,6 @@ The placeholders in the format string are marked by % and are followed by one or
     * `s` — yields a string as is
     * `x` — yields an integer as a hexadecimal number (lower-case)
     * `X` — yields an integer as a hexadecimal number (upper-case)
-
-See more at <a href="https://github.com/alexei/sprintf.js" target="_blank">sprintf.js</a>
 
 Old way of logging using `$log`:
 ```javascript
