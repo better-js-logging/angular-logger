@@ -53,7 +53,29 @@
 
 						function enhanceLogline(args, context, loggingPattern) {
 	                        var prefix = generatePrefix(context, loggingPattern);
-							return [prefix].concat([].slice.call(args));
+							var processedArgs = maybeApplySprintf([].slice.call(args));
+							return [prefix].concat([].slice.call(processedArgs));
+							
+							function maybeApplySprintf(args) {
+								var sprintfCandidate = args.length >= 2 && typeof args[0] === 'string' && args[0].indexOf('%') !== -1;
+		                        if (sprintfCandidate) {
+		                        	try {
+		                        		// count placeholders
+			                        	var placeholderCount = 0;
+			                        	var f = function() { return placeholderCount++ };
+			                        	sprintf(args[0], [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]);
+			                        	// apply sprintf with the proper arguments
+			                        	if (placeholderCount > 0) {
+			                        		args[0] = sprintf.apply(null, args);
+			                        	}
+			                        	// remove arguments consumed by sprintf
+			                        	args.splice(1, placeholderCount);
+		                        	} catch (e) {
+		                        		// invalid arguments passed into sprintf, continue without applying
+		                        	}
+		                        }
+		                        return args;
+							}
 						}
 
 						function generatePrefix(context, loggingPattern) {
