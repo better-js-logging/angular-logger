@@ -36,7 +36,11 @@ Based on original post of:
 
 ## Applying Patterns
 ### Datetime stamp patterns
-Will be implemented under [issue #14](https://github.com/pdorgambide/angular-logger/issues/14). For pattern config, please refer to [momentjs' documentation on parsing moment dates](http://momentjs.com/docs/#/displaying/).
+
+**For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)**
+
+Will be implemented under [issue #14](https://github.com/pdorgambide/angular-logger/issues/14)
+
 ### Logging patterns
 
 **For all options, see [sprintf.js](https://github.com/alexei/sprintf.js)**
