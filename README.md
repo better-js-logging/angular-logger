@@ -100,19 +100,23 @@ logger.warn("This %s pattern %j", "is", "{ 'in': 'put' }", "but this is not!", [
 
 ## Managing logging priority
 
-The following logging functions are available:
+Using logging levels, we can manage output on several levels. Contexts can be named using dot '.' notation, where the names before dots are intepreted as groups or packages.
 
-logger.           | mapped to $log. | with logLevel
+For example for `'a.b'` and `a.c` we can define a general log level for `a` and have a different log level for only 'a.c'.
+
+The following logging functions (left side) are available:
+
+logging function  | mapped to: | with logLevel
 ----------------- | --------------- | --------------
-_`trace`_         | _`debug`_       | `TRACE`
-_`debug`_         | _`debug`_       | `DEBUG`
-_`log*`_           | _`log`_        | `INFO`
-_`info`_          | _`info`_        | `INFO`
-_`warn`_          | _`warn`_        | `WARN`
-_`error`_         | _`error`_       | `ERROR`
+_`logger.trace`_  | _`$log.debug`_       | `TRACE`
+_`logger.debug`_  | _`$log.debug`_       | `DEBUG`
+_`logger.log*`_   | _`$log.log`_        | `INFO`
+_`logger.info`_   | _`$log.info`_        | `INFO`
+_`logger.warn`_   | _`$log.warn`_        | `WARN`
+_`logger.error`_  | _`$log.error`_       | `ERROR`
 `*` maintained for backwards compatibility with `$log.log`
 
-The level's order are the following:
+The level's order are as follows:
 ```
   1. TRACE: displays all levels, is the finest output and only recommended during debugging
   2. DEBUG: display all but the finest logs, only recommended during develop stages
@@ -134,6 +138,9 @@ app.config(function (logEnhancerProvider) {
         'a': logEnhancerProvider.LEVEL.WARN, // warn + error
         '*': logEnhancerProvider.LEVEL.INFO // info + warn + error
     };
+    // globally only INFO and more important are logged
+    // for group 'a' default is WARN and ERROR
+    // a.b.c and a.b.d override logging everything-with-TRACE and least-with-ERROR respectively
 });
 
 
