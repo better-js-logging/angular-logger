@@ -64,7 +64,7 @@
                     
                         function getLogLevelThreshold(context) {
                         	if (context) {
-	                            if ($log.logLevels[context] != null) {
+	                            if ($log.logLevels[context] !== undefined) {
 	                                return $log.logLevels[context];
 	                            } else if (context.indexOf('.') != -1) {
 	                                return getLogLevelThreshold(context.substring(0, context.lastIndexOf('.')));
