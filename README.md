@@ -79,7 +79,7 @@ app.run(function($log) {
 // became: Sunday::[app]>Hello World
 ```
 
-**For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)**
+ * For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)
 
 #### Logging patterns
 
@@ -105,7 +105,7 @@ logger.warn("This %s pattern %j", "is", "{ 'in': 'put' }", "but this is not!", [
 // 17-5-2015 00:16:08::[test]>  This is pattern "{ 'in': 'put' }" but this is not! ["this", "is handled", "by the browser"] Object {including: "syntax highlighting", and: "console interaction"}
  ```
 
-**For all options, see [sprintf.js](https://github.com/alexei/sprintf.js)**
+ * For all options, see [sprintf.js](https://github.com/alexei/sprintf.js)
 
 [working demo](https://jsfiddle.net/plantface/qkobLe0m/)
 
