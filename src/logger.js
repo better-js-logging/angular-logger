@@ -57,13 +57,13 @@
 							return [prefix].concat([].slice.call(processedArgs));
 							
 							function maybeApplySprintf(args) {
-								var sprintfCandidate = args.length >= 2 && typeof args[0] === 'string' && args[0].indexOf('%') !== -1;
+								var sprintfCandidate = sprintf && args.length >= 2 && typeof args[0] === 'string' && args[0].indexOf('%') !== -1;
 		                        if (sprintfCandidate) {
 		                        	try {
 		                        		// count placeholders
 			                        	var placeholderCount = 0;
 			                        	var f = function() { return placeholderCount++ };
-			                        	sprintf(args[0], [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]);
+			                        	sprintf(args[0], f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f);
 			                        	// apply sprintf with the proper arguments
 			                        	if (placeholderCount > 0) {
 			                        		args[0] = sprintf.apply(null, args);
