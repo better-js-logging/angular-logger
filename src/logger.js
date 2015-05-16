@@ -7,7 +7,7 @@
 		var provider = this;
 
         this.datetimePattern = 'dddd h:mm:ss a'; 	// default datetime stamp pattern, overwrite in config phase
-        this.loggingPattern = '%s - %s: '; 			// default logging pattern, overwrite in config phase
+        this.loggingPattern = '%s::[%s]> '; 			// default logging pattern, overwrite in config phase
         this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 }; // with these configure loglevels in config fase
         this.logLevels = {'*': this.LEVEL.TRACE}; 	// everything by everyone should be visible by default
 
