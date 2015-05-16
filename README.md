@@ -1,3 +1,15 @@
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [Installing](#)
+		- [Bower](#)
+		- [Manually](#)
+- [Getting Started](#)
+- [Applying Patterns](#)
+		- [Prefix pattern](#)
+		- [Datetime stamp patterns](#)
+		- [Logging patterns](#)
+- [Managing logging priority](#)
+
 #angular-logger
 > Enhanced $log in AngularJS
 
