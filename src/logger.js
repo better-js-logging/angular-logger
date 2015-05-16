@@ -48,7 +48,7 @@
 	                        }
 							
 							var prefix = '';
-	                        if (sprintf && moment) {
+	                        if (sprintf) {
 	                        	prefix = sprintf(loggingPattern, dateStr, context);
 	                        } else {
 	                        	// use fixed layout: '%s::[%s]> '
