@@ -6,9 +6,10 @@
 	provider('logEnhancer', function() {
 		var provider = this;
 
-        this.loggingPattern = '%s - %s: '; // default logging pattern, overwrite in config phase
+        this.datetimePattern = 'dddd h:mm:ss a'; 	// default datetime stamp pattern, overwrite in config phase
+        this.loggingPattern = '%s - %s: '; 			// default logging pattern, overwrite in config phase
         this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 }; // with these configure loglevels in config fase
-        this.logLevels = {'*': this.LEVEL.TRACE}; // everything by everyone should be visible by default
+        this.logLevels = {'*': this.LEVEL.TRACE}; 	// everything by everyone should be visible by default
 
 		this.$get = function() {
 			return {
@@ -20,19 +21,19 @@
 
 					$log.getInstance = function(context) {
 						return {
-							trace	: enhanceLogging($log.debug, $log.LEVEL.TRACE, context, provider.loggingPattern),
-							debug	: enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, provider.loggingPattern),
-							log		: enhanceLogging($log.log, $log.LEVEL.INFO, context, provider.loggingPattern),
-							info	: enhanceLogging($log.info, $log.LEVEL.INFO, context, provider.loggingPattern),
-							warn	: enhanceLogging($log.warn, $log.LEVEL.WARN, context, provider.loggingPattern),
-							error	: enhanceLogging($log.error, $log.LEVEL.ERROR, context, provider.loggingPattern)
+							trace	: enhanceLogging($log.debug, $log.LEVEL.TRACE, context, provider.datetimePattern, provider.loggingPattern),
+							debug	: enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, provider.datetimePattern, provider.loggingPattern),
+							log		: enhanceLogging($log.log, 	 $log.LEVEL.INFO,  context, provider.datetimePattern, provider.loggingPattern),
+							info	: enhanceLogging($log.info,  $log.LEVEL.INFO,  context, provider.datetimePattern, provider.loggingPattern),
+							warn	: enhanceLogging($log.warn,  $log.LEVEL.WARN,  context, provider.datetimePattern, provider.loggingPattern),
+							error	: enhanceLogging($log.error, $log.LEVEL.ERROR, context, provider.datetimePattern, provider.loggingPattern)
 						};
 					};
 
-					function enhanceLogging(loggingFunc, level, context, loggingPattern) {
+					function enhanceLogging(loggingFunc, level, context, datetimePattern, loggingPattern) {
 						return function() {
                             if (levelPassesThreshold(context, level)) {
-                                loggingFunc.apply(null, enhanceLogline(arguments, context, loggingPattern));
+                                loggingFunc.apply(null, enhanceLogline(arguments, context, datetimePattern, loggingPattern));
                             }
 						};
 
@@ -51,8 +52,8 @@
 	                        }
 	                    }
 
-						function enhanceLogline(args, context, loggingPattern) {
-	                        var prefix = generatePrefix(context, loggingPattern);
+						function enhanceLogline(args, context, datetimePattern, loggingPattern) {
+	                        var prefix = generatePrefix(context, datetimePattern, loggingPattern);
 							var processedArgs = maybeApplySprintf([].slice.call(args));
 							return [prefix].concat([].slice.call(processedArgs));
 							
@@ -78,10 +79,10 @@
 							}
 						}
 
-						function generatePrefix(context, loggingPattern) {
+						function generatePrefix(context, datetimePattern, loggingPattern) {
 							var dateStr = '';
 	                        if (moment) {
-	                            dateStr = moment().format("dddd h:mm:ss a");
+	                            dateStr = moment().format(datetimePattern);
 	                        } else {
 	                            var d = new Date();
 	                            var timeStr = new Date().toTimeString().match( /^([0-9]{2}:[0-9]{2}:[0-9]{2})/ )[0];
@@ -106,6 +107,7 @@
 	*/
     config(['logEnhancerProvider',
         function (logEnhancerProvider) {
+            logEnhancerProvider.datetimePattern = 'dddd h:mm:ss a';
             logEnhancerProvider.loggingPattern = '%s::[%s]> ';
             logEnhancerProvider.logLevels = {'*': logEnhancerProvider.LEVEL.TRACE};
             /*
