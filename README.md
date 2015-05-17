@@ -145,8 +145,8 @@ logger.warn("This %s pattern %j", "is", "{ 'in': 'put' }", "but this is not!", [
  
 To **log an `Object`**, you now have three ways of doing it, but the combined solution shown above has best integration with the browser.
  ```javascript
-logger.warn("Do it yourself: " + JSON.stringify(obj)); // json string with stringify limitations
-logger.warn("Let sprintf handle it: %j", obj); // json string
+logger.warn("Do it yourself: " + JSON.stringify(obj)); // json string with stringify's limitations
+logger.warn("Let sprintf handle it: %j", obj); // json string with sprintf's limitations
 logger.warn("Let the browser handle it: ", obj); // interactive tree in the browser with syntax highlighting
  ```
 
