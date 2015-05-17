@@ -7,6 +7,8 @@
 
  * [originally by Benny Bottema](http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/)
 
+---
+
 - [Installing](#)
 		- [Bower](#)
 		- [Manually](#)
@@ -16,6 +18,8 @@
 		- [Datetime stamp patterns](#)
 		- [Logging patterns](#)
 - [Managing logging priority](#)
+
+---
 
 ## Installing
 
