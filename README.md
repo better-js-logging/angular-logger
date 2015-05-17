@@ -1,3 +1,5 @@
+[![MIT License][license-image]][license-url]
+
 #angular-logger
 
 ```javascript
@@ -220,3 +222,6 @@ $log.logLevels['a.b.c'] = $log.LEVEL.TRACE;
 $log.logLevels['a.b.d'] = $log.LEVEL.ERROR;
 // etc.
 ```
+
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: LICENSE
