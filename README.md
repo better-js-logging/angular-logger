@@ -34,7 +34,7 @@ Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprint
 
 ## Getting Started
 
-1. Add `logger` module as a dependency to your module:
+1. After installing, add `logger` module as a dependency to your module:
 
    ```javascript
    angular.module('YourModule', ['logger'])
@@ -43,13 +43,13 @@ Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprint
 
    ```javascript
    app.controller('LogTestCtrl', function ($log) {
-      var notMutedLogger = $log.getInstance('Not Muted');
+      var normalLogger = $log.getInstance('Normal');
       var mutedLogger = $log.getInstance('Muted');
    
       $log.logLevels['Muted'] = $log.LEVEL.OFF;
    
       this.doTest = function () {
-         notMutedLogger.info("This *will* appear in your console");
+         normalLogger.info("This *will* appear in your console");
          mutedLogger.info("This will *not* appear in your console");
       }
    });
