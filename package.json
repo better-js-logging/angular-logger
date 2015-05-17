@@ -4,27 +4,37 @@
   "description": "> Enhanced $log in AngularJS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/punknroll/angular-logger.git"
+    "url": "https://github.com/pdorgambide/angular-logger"
   },
   "keywords": [
     "angular",
     "logger",
-    "angular-logger"
+    "angular-logger",
+    "$log"
   ],
-  "author": "",
+  "author": {
+    "name": "Benny Bottema",
+    "url": "http://blog.projectnibble.org"
+  },
+  "contributors": [{
+    "name": "Pablo Dorgambide",
+    "email": "pdorgambide@qualigy.com",
+    "url": "http://www.qualigy.com"
+  }],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pdorgambide/angular-logger"
+    "url": "https://github.com/pdorgambide/angular-logger/issues"
   },
   "homepage": "https://github.com/pdorgambide/angular-logger",
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.5.2",
-    "gulp-uglify": "^1.1.0"
+    "gulp-uglify": "^1.1.0",
+    "gulp-jasmine": "~1.1.3"
   }
 }
