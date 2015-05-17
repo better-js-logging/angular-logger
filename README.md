@@ -133,16 +133,17 @@ var logger = $log.getInstance("myapp.file-upload");
 logger.error("Error uploading document [%s], Error: '%s'. Try again later.", filename, err.message)
 // Sunday 12:13:06 pm::[myapp.file-upload]> Error uploading document [contract.pdf], Error: 'Service currently down'. Try again later.
  ```
- 
-You can even combine pattern input and normal input:
+
+---
+
+You can even **combine pattern input and normal input**:
  ```javascript
 var logger = $log.getInstance('test');
 logger.warn("This %s pattern %j", "is", "{ 'in': 'put' }", "but this is not!", ['this', 'is', ['handled'], 'by the browser'], { 'including': 'syntax highlighting', 'and': 'console interaction' });
 // 17-5-2015 00:16:08::[test]>  This is pattern "{ 'in': 'put' }" but this is not! ["this", "is handled", "by the browser"] Object {including: "syntax highlighting", and: "console interaction"}
  ```
  
-To log an `Object`, you now have three ways of doing it, but the combined solution shown above has best integration with the browser.
- 
+To **log an `Object`**, you now have three ways of doing it, but the combined solution shown above has best integration with the browser.
  ```javascript
 logger.warn("Do it yourself: " + JSON.stringify(obj)); // json string with stringify limitations
 logger.warn("Let sprintf handle it: %j", obj); // json string
