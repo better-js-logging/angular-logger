@@ -5,10 +5,7 @@
 * Introduces **log levels**, where you can manage logging output per context or even a group of contexts
 * Works as a **complete drop-in** replacement for your current `$log.log` or `console.log` statements
 
-Based on original post of:
-<a href="http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/" target="_blank">Enhancing $log in AngularJs the simple way by Benny Bottema</a>
-
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+ * [originally by Benny Bottema](http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/)
 
 - [Installing](#)
 		- [Bower](#)
