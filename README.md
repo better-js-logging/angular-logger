@@ -4,8 +4,7 @@
 * Further enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
 * Introduces **log levels**, where you can manage logging output per context or even a group of contexts
 * Works as a **complete drop-in** replacement for your current `$log.log` or `console.log` statements
-
- * [originally by Benny Bottema](http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/)
+* [original post](http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/)
 
 ---
 
