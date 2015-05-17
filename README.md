@@ -121,17 +121,17 @@ This way you can switch to a 24h format this way as well, for example.
 
 If you have included _sprintf.js_ in your webapp, you can start using patterns with _angular-logger_.
 
-Old way of logging using `$log`:
+Traditional style with `$log` or `console`:
 ```javascript
-$log.debug ("Could't UPDATE resource "+resource.name+". Error: "+error.message+". Try again in "+delaySeconds+" seconds.")
-// Could't UPDATE resource ADDRESS. Error: ROAD NOT LOCATED. Try again in 5 seconds.
+$log.error ("Error uploading document [" + filename + "], Error: '" + err.message + "'. Try again later.")
+// Error uploading document [contract.pdf], Error: 'Service currently down'. Try again later. "{ ... }"
 ```
 
-New way of logging using enhanced `$log`:
+Modern style with angular-logger enhanced `$log`:
  ```javascript
-var logger = $log.getInstance("SomeContext");
-logger.debug("Could't UPDATE resource %s. Error: %s. Try again in %d seconds.", resource.name, error.message, delaySeconds)
-// Sunday 12:13:06 pm::[SomeContext]> > Could't UPDATE resource ADDRESS. Error: ROAD NOT LOCATED. Try again in 5 seconds.
+var logger = $log.getInstance("myapp.file-upload");
+logger.error("Error uploading document [%s], Error: '%s'. Try again later.", filename, err.message)
+// Sunday 12:13:06 pm::[myapp.file-upload]> Error uploading document [contract.pdf], Error: 'Service currently down'. Try again later.
  ```
  
 You can even combine pattern input and normal input:
@@ -139,6 +139,14 @@ You can even combine pattern input and normal input:
 var logger = $log.getInstance('test');
 logger.warn("This %s pattern %j", "is", "{ 'in': 'put' }", "but this is not!", ['this', 'is', ['handled'], 'by the browser'], { 'including': 'syntax highlighting', 'and': 'console interaction' });
 // 17-5-2015 00:16:08::[test]>  This is pattern "{ 'in': 'put' }" but this is not! ["this", "is handled", "by the browser"] Object {including: "syntax highlighting", and: "console interaction"}
+ ```
+ 
+To log an `Object`, you now have three ways of doing it, but the combined solution shown above has best integration with the browser.
+ 
+ ```javascript
+logger.warn("Do it yourself: " + JSON.stringify(obj)); // json string with stringify limitations
+logger.warn("Let sprintf handle it: %j", obj); // json string
+logger.warn("Let the browser handle it: ", obj); // interactive tree in the browser with syntax highlighting
  ```
 
  * For all options, see [sprintf.js](https://github.com/alexei/sprintf.js)
