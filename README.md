@@ -58,6 +58,7 @@ Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprint
 
 ## Applying Patterns
 #### Prefix pattern
+
 By default, the prefix is formatted like so:
 
 `datetime here::[context's name here]>your logging input here`
@@ -77,7 +78,7 @@ app.run(function($log) {
 
 #### Datetime stamp patterns
 
-The default pattern is `dddd h:mm:ss a`, which translates to _Sunday 12:55:07 am_. You customize the pattern as follows:
+If you have included _moment.js_ in your webapp, you can start using datetime stamp patterns with angular-logger. The default pattern is `dddd h:mm:ss a`, which translates to _Sunday 12:55:07 am_. You customize the pattern as follows:
 
 ```javascript
 app.config(function (logEnhancerProvider) {
@@ -89,6 +90,8 @@ app.run(function($log) {
 // was:    Sunday 12:55:07 am::[app]>Hello World
 // became: Sunday::[app]>Hello World
 ```
+
+This way you can switch to a 24h format this way as well, for example.
 
  * For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)
 
