@@ -1,5 +1,25 @@
 #angular-logger
 
+```javascript
+logEnhancerProvider.loggingPattern = '%s::[%s]>';
+logEnhancerProvider.datetimePattern = 'dddd h:mm:ss a';
+logEnhancerProvider.logLevels = {
+	'*': logEnhancerProvider.LEVEL.OFF,
+	'main': logEnhancerProvider.LEVEL.WARN,
+	'main.subB': logEnhancerProvider.LEVEL.TRACE
+};
+
+$log.getInstance('banana').info('Hello World!'); // ignored, logging turned off for '*'
+$log.getInstance('main.subA').info('Hello World!'); // ignored, doesn't pass logging threshold of 'main'
+
+var logger = $log.getInstance('main.subB');
+logger.trace('Hello World!'); // 17-5-2015 11:52:52::[main.subB]> Hello World!
+logger.info('Hello %s!', 'World', { 'extra': ['pass-through params'] }); 
+// 17-5-2015 11:53:51::[main.subB]> Hello World! Object { "extra": "pass-through params"}
+```
+
+---
+
 * Enhances Angular's `$log` service so that you can define **separate contexts to log for**, where the output will be prepended with the context's name and a datetime stamp.
 * Further enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
 * Introduces **log levels**, where you can manage logging output per context or even a group of contexts
