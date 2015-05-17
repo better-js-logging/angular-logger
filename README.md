@@ -148,6 +148,7 @@ To **log an `Object`**, you now have three ways of doing it, but the combined so
 logger.warn("Do it yourself: " + JSON.stringify(obj)); // json string with stringify's limitations
 logger.warn("Let sprintf handle it: %j", obj); // json string with sprintf's limitations
 logger.warn("Let the browser handle it: ", obj); // interactive tree in the browser with syntax highlighting
+logger.warn("Or combine all!: %s, %j", JSON.stringify(obj), obj, obj);
  ```
 
  * For all options, see [sprintf.js](https://github.com/alexei/sprintf.js)
