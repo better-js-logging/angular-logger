@@ -32,7 +32,7 @@ describe("logging-enhancer", function() {
         
         var datestr = moment().format('dddd hh'); // as we can't mock momentjs, let's at least have an hour resolution
         
-        expect(f_none("Hello World!"))           .toEqual(["", "Hello World!"]);
+        expect(f_none("Hello World!"))      .toEqual(["", "Hello World!"]);
         expect(f_both("Hello World!"))      .toEqual([datestr + "(dummy): ", "Hello World!"]);
         expect(f_both("%%"))                .toEqual([datestr + "(dummy): ", "%%"]);
         expect(f_date1("Hello World!"))     .toEqual([datestr + ": ", "Hello World!"]);
@@ -46,11 +46,33 @@ describe("logging-enhancer", function() {
         expect(counters[DEBUG]).toBe(1);
     });
     
-    // it should work with simple replacements
-    // it should work with simple extra objects
+    it("should log with sprintf replacements", function() {
+        // we're not testing everything here, sprintf already does that
+        var f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, '', '');
+        
+        expect(f("Hello %s!", "World")).toEqual(["", "Hello World!"]);
+        expect(f("%s%% %s!", "Hello", "World")).toEqual(["", "Hello% World!"]);
+        expect(f("%(second)s %(first)s!", { "first": "World", "second": "Hello" })).toEqual(["", "Hello World!"]);
+        expect(f("%(second)s %(first)s!", { "first": "World", "second": "Hello" }, [1,2,3])).toEqual(["", "Hello World!", [1,2,3]]);
+        
+        expect(counters[DEBUG]).toBe(4);
+    });
+    
+    it("should log with extra objects passed to the enhanced logging function", function() {
+        // we're not testing everything here, sprintf already does that
+        var f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, '', '');
+        
+        expect(f("Hello", "World", "!")).toEqual(["", "Hello", "World", "!"]);
+        expect(f("Hello", { World: "!" } )).toEqual(["", "Hello", { World: "!" }]);
+        expect(f("Hello", { "World": "!" } )).toEqual(["", "Hello", { "World": "!" }]);
+        expect(f("Hello", { "World": ["!"] }, [1, 2, 3] )).toEqual(["", "Hello", { "World": ["!"] }, [1, 2, 3]]);
+        
+        expect(counters[DEBUG]).toBe(4);
+    });
+    
+    // to do:
     // it should work with replacements and extra objects
     // it should works with moment patterns
-    // it should works with prefix patterns
     // it should work without sprintf
     // it should work without moment
     // it should work with simple priorities

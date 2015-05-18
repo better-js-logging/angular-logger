@@ -4,8 +4,15 @@
 (function() {
 	var LoggingEnhancer = function(sprintf, moment) {
 		var self = this;
-		
-		this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 };
+
+		this.LEVEL = {
+			TRACE: 4,
+			DEBUG: 3,
+			INFO: 2,
+			WARN: 1,
+			ERROR: 0,
+			OFF: -1
+		};
 
 		// returns a value for testing purposes only
 		this.enhanceLogging = function(loggingFunc, level, context, config, datetimePattern, loggingPattern) {
@@ -48,20 +55,25 @@
 					if (sprintfCandidate) {
 						try {
 							// count placeholders
-							var placeholderCount = 0;
-							var f = function() {
-								return placeholderCount++;
-							};
-							sprintf(args[0], f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f);
-							// apply sprintf with the proper arguments
-							if (placeholderCount > 0) {
-								args[0] = sprintf.apply(null, args);
+							var hasNamedHolders = typeof args[1] === 'object' && /\x25\([a-zA-Z0-9_]+\)[b-fijosuxX]/.test(args[0]);
+							if (hasNamedHolders) {
+								// handle singular argument for named placeholders
+								args[0] = sprintf.apply(null, args.slice(0, 2));
+								args.splice(1, 1); // remove singular argument consumed by sprintf
 							}
-							// remove arguments consumed by sprintf
-							args.splice(1, placeholderCount);
+							else {
+								// handle regular placeholders
+								var placeholderCount = args[0].match(/\x25[b-fijosuxX]/g).length;
+								// apply sprintf with the proper arguments
+								if (placeholderCount > 0) {
+									args[0] = sprintf.apply(null, args);
+									args.splice(1, placeholderCount); // remove arguments consumed by sprintf
+								}
+							}
 						}
 						catch (e) {
 							// invalid arguments passed into sprintf, continue without applying
+							args.unshift(e);
 						}
 					}
 					return args;
@@ -93,8 +105,8 @@
 	if (typeof window !== "undefined") {
 		window.loggingEnhancer = new LoggingEnhancer(window.sprintf, window.moment);
 	}
-	
-	if (typeof exports !== "undefined" ) {
+
+	if (typeof exports !== "undefined") {
 		exports.LoggingEnhancer = LoggingEnhancer;
 	}
 })();
