@@ -22,7 +22,7 @@ describe("logging-enhancer", function() {
         counters = [0,0,0,0,0,0];
     });
     
-    it("should log with various prefix configurations", function() {
+    it("should log simple strings with various prefix configurations", function() {
         var f_none      = enh.enhanceLogging(dummy.trace, enh.LEVEL.TRACE, 'dummy', {}, 'dddd hh', '');
         var f_both      = enh.enhanceLogging(dummy.trace, enh.LEVEL.TRACE, 'dummy', {}, 'dddd hh', '%s(%s): ');
         var f_date1     = enh.enhanceLogging(dummy.warn, enh.LEVEL.TRACE, 'dummy', {}, 'dddd hh', '%s: ');
@@ -58,7 +58,6 @@ describe("logging-enhancer", function() {
     });
     
     it("should log with extra objects passed to the enhanced logging function", function() {
-        // we're not testing everything here, sprintf already does that
         var f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, '', '');
         
         expect(f("Hello", "World", "!")).toEqual(["", "Hello", "World", "!"]);
@@ -70,7 +69,6 @@ describe("logging-enhancer", function() {
     });
     
     it("should log with combined sprintf placeholders and extra objects", function() {
-        // we're not testing everything here, sprintf already does that
         var f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, '', '');
         
         expect(f("%s %s!", "Hello", "World", [1,2,3])).toEqual(["", "Hello World!", [1,2,3]]);
@@ -81,7 +79,6 @@ describe("logging-enhancer", function() {
     });
     
     // to do:
-    // it should work with replacements and extra objects
     // it should works with moment patterns
     // it should work without sprintf
     // it should work without moment
