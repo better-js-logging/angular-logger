@@ -100,6 +100,19 @@ app.run(function($log) {
 // became: Sunday 12:55:07 am - app: Hello World
 ```
 
+You can also remove it completely, or have just the datetime stamp or just the context prefixed:
+
+```javascript
+// by the power of sprintf!
+logEnhancerProvider.loggingPattern = '%s - %s: '; // both
+logEnhancerProvider.loggingPattern = '%s: '; // timestamp
+logEnhancerProvider.loggingPattern = '%1$s: '; // timestamp by index
+logEnhancerProvider.loggingPattern = '%2$s: '; // context by index
+logEnhancerProvider.loggingPattern = '%2$s - %1$s: '; // both, reversed
+```
+
+This works, because angular-logger will use two arguments for the prefix, which can be referenced by index.
+
 #### Datetime stamp patterns
 
 If you have included _moment.js_ in your webapp, you can start using datetime stamp patterns with angular-logger. The default pattern is `dddd h:mm:ss a`, which translates to _Sunday 12:55:07 am_. You customize the pattern as follows:
