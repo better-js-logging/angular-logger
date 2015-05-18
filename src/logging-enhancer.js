@@ -63,7 +63,7 @@
 							}
 							else {
 								// handle regular placeholders
-								var placeholderCount = args[0].match(/\x25[b-fijosuxX]/g).length;
+								var placeholderCount = args[0].match(/\x25(\d\$)?[b-fijosuxX]/g).length;
 								// apply sprintf with the proper arguments
 								if (placeholderCount > 0) {
 									args[0] = sprintf.apply(null, args);

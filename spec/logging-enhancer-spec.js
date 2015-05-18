@@ -53,9 +53,8 @@ describe("logging-enhancer", function() {
         expect(f("Hello %s!", "World")).toEqual(["", "Hello World!"]);
         expect(f("%s%% %s!", "Hello", "World")).toEqual(["", "Hello% World!"]);
         expect(f("%(second)s %(first)s!", { "first": "World", "second": "Hello" })).toEqual(["", "Hello World!"]);
-        expect(f("%(second)s %(first)s!", { "first": "World", "second": "Hello" }, [1,2,3])).toEqual(["", "Hello World!", [1,2,3]]);
         
-        expect(counters[DEBUG]).toBe(4);
+        expect(counters[DEBUG]).toBe(3);
     });
     
     it("should log with extra objects passed to the enhanced logging function", function() {
@@ -68,6 +67,17 @@ describe("logging-enhancer", function() {
         expect(f("Hello", { "World": ["!"] }, [1, 2, 3] )).toEqual(["", "Hello", { "World": ["!"] }, [1, 2, 3]]);
         
         expect(counters[DEBUG]).toBe(4);
+    });
+    
+    it("should log with combined sprintf placeholders and extra objects", function() {
+        // we're not testing everything here, sprintf already does that
+        var f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, '', '');
+        
+        expect(f("%s %s!", "Hello", "World", [1,2,3])).toEqual(["", "Hello World!", [1,2,3]]);
+        expect(f("%2$s %1$s!", "Hello", "World", { extra: 'object' })).toEqual(["", "World Hello!", { extra: 'object' }]);
+        expect(f("%(second)s %(first)s!", { "first": "World", "second": "Hello" }, [1,2,3])).toEqual(["", "Hello World!", [1,2,3]]);
+        
+        expect(counters[DEBUG]).toBe(3);
     });
     
     // to do:
