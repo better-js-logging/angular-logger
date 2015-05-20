@@ -13,12 +13,8 @@ logEnhancerProvider.logLevels = {
 
 $log.getInstance('banana').info('Hello World!'); // ignored, logging turned off for '*'
 $log.getInstance('main.subA').info('Hello World!'); // ignored, doesn't pass logging threshold of 'main'
-
-var logger = $log.getInstance('main.subB');
-logger.trace('Hello World!'); 
-// 17-5-2015 11:52:52::[main.subB]> Hello World!
-
-logger.info('Hello %s!', 'World', { 'extra': ['pass-through params'] }); 
+$log.getInstance('main.subB').trace('Hello World!'); // 17-5-2015 11:52:52::[main.subB]> Hello World!
+$log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-through params'] }); 
 // 17-5-2015 11:53:51::[main.subB]> Hello World! Object { "extra": "pass-through params"}
 ```
 
