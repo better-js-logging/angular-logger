@@ -5,14 +5,7 @@
 	var LoggingEnhancer = function(sprintf, moment) {
 		var self = this;
 
-		this.LEVEL = {
-			TRACE: 4,
-			DEBUG: 3,
-			INFO: 2,
-			WARN: 1,
-			ERROR: 0,
-			OFF: -1
-		};
+		this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 };
 
 		// returns a value for testing purposes only
 		this.enhanceLogging = function(loggingFunc, level, context, config, datetimePattern, loggingPattern) {
