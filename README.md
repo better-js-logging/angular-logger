@@ -1,4 +1,4 @@
-[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
+[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 #angular-logger
 
@@ -246,3 +246,6 @@ $log.logLevels['a.b.d'] = $log.LEVEL.ERROR;
 
 [travis-url]: http://travis-ci.org/pdorgambide/angular-logger
 [travis-image]: https://img.shields.io/travis/pdorgambide/angular-logger.svg?style=flat
+
+[coveralls-url]: https://coveralls.io/r/pdorgambide/angular-logger
+[coveralls-image]: https://coveralls.io/repos/pdorgambide/angular-logger/badge.svg
