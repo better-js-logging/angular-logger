@@ -32,30 +32,34 @@ logger.info('Hello %s!', 'World', { 'extra': ['pass-through params'] });
 
 ---
 
-- [Installing](#)
-		- [Bower](#)
-		- [Manually](#)
-- [Getting Started](#)
-- [Applying Patterns](#)
-		- [Prefix pattern](#)
-		- [Datetime stamp patterns](#)
-		- [Logging patterns](#)
-- [Managing logging priority](#)
+- [Installing](#installing)
+		- [Bower](#bower)
+		- [Manually](#manually)
+- [Getting Started](#getting-started)
+- [Applying Patterns](#applying-patterns)
+		- [Prefix pattern](#prefix-pattern)
+		- [Datetime stamp patterns](#datetime-stamp-patterns)
+		- [Logging patterns](#logging-patterns)
+- [Managing logging priority](#managing-logging-priority)
 
 ---
 
+<a name='installing'/>
 ## Installing
 
 angular-logger has optional dependencies on _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_: without moment you can't pattern a nicely readable datetime stamp and without sprintf you can't pattern your logging input lines. Default fixed patterns are applied if either they are missing.
 
+<a name='bower'/>
 #### Bower
 
 Will be implemented under [issue #10](https://github.com/pdorgambide/angular-logger/issues/10)
 
+<a name='manually'/>
 #### Manually
 
 Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app.
 
+<a name='getting-started'/>
 ## Getting Started
 
 1. After installing, add `logger` module as a dependency to your module:
@@ -80,7 +84,9 @@ Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprint
    ```
    [working demo](http://jsfiddle.net/plantface/d7qkaumr/)
 
+<a name='applying-patterns'/>
 ## Applying Patterns
+<a name='prefix-pattern'/>
 #### Prefix pattern
 
 By default, the prefix is formatted like so:
@@ -113,6 +119,7 @@ logEnhancerProvider.loggingPattern = '%2$s - %1$s: '; // both, reversed
 
 This works, because angular-logger will use two arguments for the prefix, which can be referenced by index.
 
+<a name='datetime-stamp-patterns'/>
 #### Datetime stamp patterns
 
 If you have included _moment.js_ in your webapp, you can start using datetime stamp patterns with angular-logger. The default pattern is `dddd h:mm:ss a`, which translates to _Sunday 12:55:07 am_. You customize the pattern as follows:
@@ -132,6 +139,7 @@ This way you can switch to a 24h format this way as well, for example.
 
  * For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)
 
+<a name='logging-patterns'/>
 #### Logging patterns
 
 If you have included _sprintf.js_ in your webapp, you can start using patterns with _angular-logger_.
@@ -170,6 +178,7 @@ logger.warn("Or combine all!: %s, %j", JSON.stringify(obj), obj, obj);
 
 [working demo](https://jsfiddle.net/plantface/qkobLe0m/)
 
+<a name='managing-logging-priority'/>
 ## Managing logging priority
 
 Using logging levels, we can manage output on several levels. Contexts can be named using dot '.' notation, where the names before dots are intepreted as groups or packages.
