@@ -5,6 +5,7 @@ var uglify = require('gulp-uglify');
 var jasmine = require('gulp-jasmine');
 var cover = require('gulp-coverage');
 var coveralls = require('gulp-coveralls');
+var lazypipe = require('lazypipe');
 
 gulp.task('clean', function() {
     return gulp.src(['dist/*', 'reports', 'debug'], { read: false })
@@ -18,18 +19,26 @@ gulp.task('build', ['clean'], function() {
         .pipe(gulp.dest('dist'));
 });
 
+var testAndGather = lazypipe()
+    .pipe(cover.instrument, {
+        pattern: ['src/**/*.js'],
+        debugDirectory: 'debug'
+    })
+    .pipe(jasmine, {includeStackTrace: true})
+    .pipe(cover.gather);
+
 gulp.task('test', ['build'], function () {
     gulp.src('spec/**/*spec.js')
-            .pipe(cover.instrument({
-                pattern: ['src/**/*.js'],
-                debugDirectory: 'debug'
-            }))
-            .pipe(jasmine({includeStackTrace: true}))
-            .pipe(cover.gather())
-            .pipe(cover.format([ 'lcov']))
-        /*    .pipe(gulp.dest('reports'));
+        .pipe(testAndGather())
+        .pipe(cover.format(['html']))
+        .pipe(gulp.dest('reports'));
+});
 
-    return gulp.src('reports/coverage.lcov')*/.pipe(coveralls());
+gulp.task('travis', ['build'], function () {
+    gulp.src('spec/**/*spec.js')
+        .pipe(testAndGather())
+        .pipe(cover.format(['lcov']))
+        .pipe(coveralls());
 });
 
 gulp.task('default', ['build'], function() {

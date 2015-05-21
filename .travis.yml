@@ -7,7 +7,7 @@ before_script:
   - npm install -g bower
   - bower install
 
-script: gulp test
+script: gulp travis
 
 git:
   depth: 10
