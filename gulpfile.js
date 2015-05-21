@@ -4,6 +4,7 @@ var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var jasmine = require('gulp-jasmine');
 var cover = require('gulp-coverage');
+var coveralls = require('gulp-coveralls');
 
 gulp.task('clean', function() {
     return gulp.src(['dist/*', 'reports', 'debug'], { read: false })
@@ -18,17 +19,17 @@ gulp.task('build', ['clean'], function() {
 });
 
 gulp.task('test', ['build'], function () {
-    var gathered = gulp.src('spec/**/*spec.js')
+    gulp.src('spec/**/*spec.js')
             .pipe(cover.instrument({
                 pattern: ['src/**/*.js'],
                 debugDirectory: 'debug'
             }))
             .pipe(jasmine({includeStackTrace: true}))
-            .pipe(cover.gather());
+            .pipe(cover.gather())
+            .pipe(cover.format(['html', 'lcov']))
+            .pipe(gulp.dest('reports'));
 
-    return gathered
-        .pipe(cover.format())
-        .pipe(gulp.dest('reports'));
+    gulp.src('reports/lcov.info').pipe(coveralls());
 });
 
 gulp.task('default', ['build'], function() {
