@@ -1,4 +1,4 @@
-[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Code Climate][gpa-image]][codeclimate-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 #angular-logger
 
@@ -236,3 +236,6 @@ run(function ($log) {
 
 [coveralls-url]: https://coveralls.io/r/pdorgambide/angular-logger
 [coveralls-image]: https://coveralls.io/repos/pdorgambide/angular-logger/badge.svg
+
+[codeclimate-url]: https://codeclimate.com/github/pdorgambide/angular-logger
+[gpa-image]: https://codeclimate.com/github/pdorgambide/angular-logger/badges/gpa.svg
