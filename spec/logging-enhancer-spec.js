@@ -83,8 +83,8 @@ describe("logging-enhancer", function() {
         var f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, '[Quarter] Q', '%s: ');
         expect(f("Hello World!")).toEqual(["Quarter " + moment().quarter() + ": ", "Hello World!"]);
         
-        f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, 'dddd, MMMM Do YYYY, h:mm:ss a', '%s: ');
-        expect(f("Hello World!")).toEqual([moment().format("dddd, MMMM Do YYYY, h:mm:ss a") + ": ", "Hello World!"]);
+        f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, 'dddd, MMMM Do YYYY, h:mm a', '%s: ');
+        expect(f("Hello World!")).toEqual([moment().format("dddd, MMMM Do YYYY, h:mm a") + ": ", "Hello World!"]);
         
         f = enh.enhanceLogging(dummy.debug, enh.LEVEL.TRACE, 'dummy', {}, 'MMMM', '%s: ');
         expect(f("Hello World!")).toEqual([moment().format("MMMM") + ": ", "Hello World!"]);
