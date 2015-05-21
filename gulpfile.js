@@ -29,7 +29,7 @@ gulp.task('test', ['build'], function () {
             .pipe(cover.format(['html', 'lcov']))
             .pipe(gulp.dest('reports'));
 
-    gulp.src('reports/lcov.info').pipe(coveralls());
+    gulp.src('reports/coverage.lcov').pipe(coveralls());
 });
 
 gulp.task('default', ['build'], function() {
