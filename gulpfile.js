@@ -3,9 +3,10 @@ var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var jasmine = require('gulp-jasmine');
+var cover = require('gulp-coverage');
 
 gulp.task('clean', function() {
-    return gulp.src(['dist/*'], { read: false })
+    return gulp.src(['dist/*', 'reports', 'debug'], { read: false })
         .pipe(clean());
 });
 
@@ -17,8 +18,17 @@ gulp.task('build', ['clean'], function() {
 });
 
 gulp.task('test', ['build'], function () {
-  return gulp.src('spec/**/*spec.js')
-        .pipe(jasmine({includeStackTrace: true}));
+    var gathered = gulp.src('spec/**/*spec.js')
+            .pipe(cover.instrument({
+                pattern: ['src/**/*.js'],
+                debugDirectory: 'debug'
+            }))
+            .pipe(jasmine({includeStackTrace: true}))
+            .pipe(cover.gather());
+
+    return gathered
+        .pipe(cover.format())
+        .pipe(gulp.dest('reports'));
 });
 
 gulp.task('default', ['build'], function() {
