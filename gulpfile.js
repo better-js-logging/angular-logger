@@ -26,10 +26,10 @@ gulp.task('test', ['build'], function () {
             }))
             .pipe(jasmine({includeStackTrace: true}))
             .pipe(cover.gather())
-            .pipe(cover.format(['html', 'lcov']))
-            .pipe(gulp.dest('reports'));
+            .pipe(cover.format([ 'lcov']))
+        /*    .pipe(gulp.dest('reports'));
 
-    return gulp.src('reports/coverage.lcov').pipe(coveralls());
+    return gulp.src('reports/coverage.lcov')*/.pipe(coveralls());
 });
 
 gulp.task('default', ['build'], function() {
