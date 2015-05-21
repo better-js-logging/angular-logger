@@ -1,4 +1,4 @@
-[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Code Climate][gpa-image]][codeclimate-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Code Climate][codeclimate-gpa-image]][codeclimate-url] [![Codacy Badge][codacy-image]][codacy-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 #angular-logger
 
@@ -238,4 +238,7 @@ run(function ($log) {
 [coveralls-image]: https://coveralls.io/repos/pdorgambide/angular-logger/badge.svg
 
 [codeclimate-url]: https://codeclimate.com/github/pdorgambide/angular-logger
-[gpa-image]: https://codeclimate.com/github/pdorgambide/angular-logger/badges/gpa.svg
+[codeclimate-gpa-image]: https://codeclimate.com/github/pdorgambide/angular-logger/badges/gpa.svg
+
+[codacy-url]: https://www.codacy.com/app/b-bottema/angular-logger
+[codacy-image]: https://www.codacy.com/project/badge/571878304e9b499f8992c908599fcc35
