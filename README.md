@@ -131,7 +131,7 @@ app.run(function($log) {
 // became: Sunday::[app]>Hello World
 ```
 
-This way you can switch to a 24h format this way as well, for example.
+This way you can switch to a 24h format this way as well, for example, or use your locale-specific format.
 
  * For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)
 
@@ -221,24 +221,11 @@ app.config(function (logEnhancerProvider) {
 });
 
 
-// config log levels after the application started running
+// modify log levels after the application started running
 run(function ($log) {
-    $log.logLevels = {
-        'a.b.c': $log.LEVEL.TRACE, // trace + debug + info + warn + error
-        'a.b.d': $log.LEVEL.ERROR, // error
-        'a.b': $log.LEVEL.DEBUG, // debug + info + warn + error
-        'a': $log.LEVEL.WARN, // warn + error
-        '*': $log.LEVEL.INFO // info + warn + error
-    };
+    $log.logLevels['a.b.c'] = $log.LEVEL.ERROR;
+    $log.logLevels['*'] = $log.LEVEL.OFF;
 });
-```
-
-Alternative notation:
-
-```javascript
-$log.logLevels['a.b.c'] = $log.LEVEL.TRACE;
-$log.logLevels['a.b.d'] = $log.LEVEL.ERROR;
-// etc.
 ```
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
