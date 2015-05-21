@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var clean = require('gulp-clean');
+var del = require('del');
 var uglify = require('gulp-uglify');
 var jasmine = require('gulp-jasmine');
 var cover = require('gulp-coverage');
@@ -8,8 +8,7 @@ var coveralls = require('gulp-coveralls');
 var lazypipe = require('lazypipe');
 
 gulp.task('clean', function() {
-    return gulp.src(['dist/*', 'reports', 'debug'], { read: false })
-        .pipe(clean());
+    del(['dist/*', 'reports', 'debug', '.coverdata']);
 });
 
 gulp.task('build', ['clean'], function() {
