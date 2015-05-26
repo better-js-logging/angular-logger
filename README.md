@@ -234,8 +234,8 @@ run(function ($log) {
 [travis-url]: http://travis-ci.org/pdorgambide/angular-logger
 [travis-image]: https://img.shields.io/travis/pdorgambide/angular-logger.svg?style=flat
 
-[coveralls-url]: https://coveralls.io/r/pdorgambide/angular-logger
-[coveralls-image]: https://coveralls.io/repos/pdorgambide/angular-logger/badge.svg
+[coveralls-url]: https://coveralls.io/r/pdorgambide/angular-logger?branch=master
+[coveralls-image]: https://coveralls.io/repos/pdorgambide/angular-logger/badge.svg?branch=master
 
 [codeclimate-url]: https://codeclimate.com/github/pdorgambide/angular-logger
 [codeclimate-gpa-image]: https://codeclimate.com/github/pdorgambide/angular-logger/badges/gpa.svg
