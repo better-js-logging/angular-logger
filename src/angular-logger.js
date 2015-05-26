@@ -7,7 +7,8 @@ var window = typeof window === "undefined" ? this : window;
 	provider('logEnhancer', function() {
 		var provider = this;
 
-        this.datetimePattern = 'dddd h:mm:ss a'; 	// default datetime stamp pattern, overwrite in config phase
+        this.datetimePattern = 'LLL'; 	// default datetime stamp pattern, overwrite in config phase
+        this.datetimeLocale = window.navigator.userLanguage || window.navigator.language || 'en';
         this.loggingPattern = '%s::[%s]> '; 		// default logging pattern, overwrite in config phase
         this.LEVEL = logEnhancer.LEVEL;             // with these configure loglevels in config fase
         this.logLevels = {'*': this.LEVEL.TRACE}; 	// everything by everyone should be visible by default
@@ -22,12 +23,12 @@ var window = typeof window === "undefined" ? this : window;
 
 					$log.getInstance = function(context) {
 						return {
-							trace	: logEnhancer.enhanceLogging($log.debug, $log.LEVEL.TRACE, context, $log, provider.datetimePattern, provider.loggingPattern),
-							debug	: logEnhancer.enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, $log, provider.datetimePattern, provider.loggingPattern),
-							log		: logEnhancer.enhanceLogging($log.log,   $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.loggingPattern),
-							info	: logEnhancer.enhanceLogging($log.info,  $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.loggingPattern),
-							warn	: logEnhancer.enhanceLogging($log.warn,  $log.LEVEL.WARN,  context, $log, provider.datetimePattern, provider.loggingPattern),
-							error	: logEnhancer.enhanceLogging($log.error, $log.LEVEL.ERROR, context, $log, provider.datetimePattern, provider.loggingPattern)
+							trace	: logEnhancer.enhanceLogging($log.debug, $log.LEVEL.TRACE, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.loggingPattern),
+							debug	: logEnhancer.enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.loggingPattern),
+							log		: logEnhancer.enhanceLogging($log.log,   $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.loggingPattern),
+							info	: logEnhancer.enhanceLogging($log.info,  $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.loggingPattern),
+							warn	: logEnhancer.enhanceLogging($log.warn,  $log.LEVEL.WARN,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.loggingPattern),
+							error	: logEnhancer.enhanceLogging($log.error, $log.LEVEL.ERROR, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.loggingPattern)
 						};
 					};
 				}
@@ -40,9 +41,10 @@ var window = typeof window === "undefined" ? this : window;
 	*/
     config(['logEnhancerProvider',
         function (logEnhancerProvider) {
-            logEnhancerProvider.datetimePattern = 'dddd h:mm:ss a';
-            logEnhancerProvider.loggingPattern = '%s::[%s]> ';
-            logEnhancerProvider.logLevels = {'*': logEnhancerProvider.LEVEL.TRACE};
+            // logEnhancerProvider.datetimePattern = 'LLL';
+            // logEnhancerProvider.datetimeLocale = window.navigator.userLanguage || window.navigator.language || 'en';
+            // logEnhancerProvider.loggingPattern = '%s::[%s]> ';
+            // logEnhancerProvider.logLevels = {'*': logEnhancerProvider.LEVEL.TRACE};
             /*
                 // example structure:
                 logEnhancerProvider.logLevels = {
