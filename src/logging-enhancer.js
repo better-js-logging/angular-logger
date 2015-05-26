@@ -8,11 +8,11 @@
 		this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 };
 
 		// returns a value for testing purposes only
-		this.enhanceLogging = function(loggingFunc, level, context, config, datetimePattern, loggingPattern) {
+		this.enhanceLogging = function(loggingFunc, level, context, config, datetimePattern, datetimeLocale, loggingPattern) {
 			config.logLevels = config.logLevels || [];
 			return function() {
 				if (levelPassesThreshold(context, level, config)) {
-					var enhancedArguments = enhanceLogline(arguments, context, datetimePattern, loggingPattern);
+					var enhancedArguments = enhanceLogline(arguments, context, datetimePattern, datetimeLocale, loggingPattern);
 					loggingFunc.apply(null, enhancedArguments);
 					return enhancedArguments;
 				}
@@ -37,8 +37,8 @@
 				}
 			}
 
-			function enhanceLogline(args, context, datetimePattern, loggingPattern) {
-				var prefix = generatePrefix(context, datetimePattern, loggingPattern);
+			function enhanceLogline(args, context, datetimePattern, datetimeLocale, loggingPattern) {
+				var prefix = generatePrefix(context, datetimePattern, datetimeLocale, loggingPattern);
 				var processedArgs = maybeApplySprintf([].slice.call(args));
 				return [prefix].concat([].slice.call(processedArgs));
 
@@ -47,21 +47,11 @@
 					var sprintfCandidate = sprintfAvailable && args.length >= 2 && typeof args[0] === 'string' && args[0].indexOf('%') !== -1;
 					if (sprintfCandidate) {
 						try {
-							// count placeholders
-							var hasNamedHolders = typeof args[1] === 'object' && /\x25\([a-zA-Z0-9_]+\)[b-fijosuxX]/.test(args[0]);
-							if (hasNamedHolders) {
-								// handle singular argument for named placeholders
-								args[0] = sprintf.apply(null, args.slice(0, 2));
-								args.splice(1, 1); // remove singular argument consumed by sprintf
-							}
-							else {
-								// handle regular placeholders
-								var placeholderCount = args[0].match(/\x25(\d\$)?[b-fijosuxX]/g).length;
-								// apply sprintf with the proper arguments
-								if (placeholderCount > 0) {
-									args[0] = sprintf.apply(null, args);
-									args.splice(1, placeholderCount); // remove arguments consumed by sprintf
-								}
+							// apply sprintf with the proper arguments
+							var placeholderCount = self.countSprintfHolders(args[0]);
+							if (placeholderCount > 0) {
+								args[0] = sprintf.apply(null, args);
+								args.splice(1, placeholderCount); // remove arguments consumed by sprintf
 							}
 						}
 						catch (e) {
@@ -69,14 +59,15 @@
 							args.unshift(e);
 						}
 					}
+
 					return args;
 				}
 			}
 
-			function generatePrefix(context, datetimePattern, loggingPattern) {
+			function generatePrefix(context, datetimePattern, datetimeLocale, loggingPattern) {
 				var dateStr = '';
 				if (typeof moment !== 'undefined') {
-					dateStr = moment().format(datetimePattern);
+					dateStr = moment().locale(datetimeLocale).format(datetimePattern);
 				}
 				else {
 					var d = new Date();
@@ -93,6 +84,25 @@
 				}
 			}
 		};
+
+		self.countSprintfHolders = function(pattern) {
+			var hasNamedHolders = /\x25\([a-zA-Z0-9_]+\)[b-fijosuxX]/.test(pattern);
+			if (hasNamedHolders) {
+				return 1;
+			}
+
+			var placeholderCounter = 0;
+
+			function f(index) {
+				return function() {
+					placeholderCounter = Math.max(placeholderCounter, index);
+				};
+			}
+
+			// these numbers are irrelevant, could be anything unique
+			sprintf(pattern, f(1), f(2), f(3), f(4), f(5), f(6), f(7), f(8), f(9), f(10));
+			return placeholderCounter;
+		}
 	};
 
 	if (typeof window !== "undefined") {
