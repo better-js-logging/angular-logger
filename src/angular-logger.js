@@ -35,38 +35,40 @@ var window = typeof window === "undefined" ? this : window;
 			};
 		};
 	}).
+	
+	/*jshint unused:false */
+	
 	/*
 		Default config and example config as well.
 		Overrides default logging pattern and global logLevel
 	*/
-    config(['logEnhancerProvider',
-        function (logEnhancerProvider) {
-            // logEnhancerProvider.datetimePattern = 'LLL';
-            // logEnhancerProvider.datetimeLocale = window.navigator.userLanguage || window.navigator.language || 'en';
-            // logEnhancerProvider.loggingPattern = '%s::[%s]> ';
-            // logEnhancerProvider.logLevels = {'*': logEnhancerProvider.LEVEL.TRACE};
-            /*
-                // example structure:
-                logEnhancerProvider.logLevels = {
-                    'a.b.c': logEnhancerProvider.LEVEL.TRACE, // trace + debug + info + warn + error
-                    'a.b.d': logEnhancerProvider.LEVEL.ERROR, // error
-                    'a.b': logEnhancerProvider.LEVEL.DEBUG, // debug + info + warn + error
-                    'a': logEnhancerProvider.LEVEL.WARN, // warn + error
-                    '*': logEnhancerProvider.LEVEL.INFO // info + warn + error
-                };
-            */
+    config(['logEnhancerProvider', function (logEnhancerProvider) {
+        // logEnhancerProvider.datetimePattern = 'LLL';
+        // logEnhancerProvider.datetimeLocale = window.navigator.userLanguage || window.navigator.language || 'en';
+        // logEnhancerProvider.loggingPattern = '%s::[%s]> ';
+        // logEnhancerProvider.logLevels = {'*': logEnhancerProvider.LEVEL.TRACE};
+        /*
+            // example structure:
+            logEnhancerProvider.logLevels = {
+                'a.b.c': logEnhancerProvider.LEVEL.TRACE, // trace + debug + info + warn + error
+                'a.b.d': logEnhancerProvider.LEVEL.ERROR, // error
+                'a.b': logEnhancerProvider.LEVEL.DEBUG, // debug + info + warn + error
+                'a': logEnhancerProvider.LEVEL.WARN, // warn + error
+                '*': logEnhancerProvider.LEVEL.INFO // info + warn + error
+            };
+        */
+    }]).
+	
+	/*jshint unused:true */
+	
+    run(['$log', 'logEnhancer', function ($log, logEnhancer) {
+        if (!sprintf) {
+            $log.warn("sprintf.js not found: https://github.com/alexei/sprintf.js, using fixed layout pattern '%s::[%s]> '");
         }
-    ]).
-    run(['$log', 'logEnhancer',
-        function ($log, logEnhancer) {
-            if (!sprintf) {
-                $log.warn("sprintf.js not found: https://github.com/alexei/sprintf.js, using fixed layout pattern '%s::[%s]> '");
-            }
-            if (!moment) {
-                $log.warn("moment.js not found: http://momentjs.com, using simple Date format");
-            }
-            logEnhancer.enhanceAngularLog($log);
-			$log.info('logging enhancer initiated');
+        if (!moment) {
+            $log.warn("moment.js not found: http://momentjs.com, using simple Date format");
         }
-    ]);
+        logEnhancer.enhanceAngularLog($log);
+		$log.info('logging enhancer initiated');
+    }]);
 }(window.loggingEnhancer, window.angular, window.sprintf, window.moment));
