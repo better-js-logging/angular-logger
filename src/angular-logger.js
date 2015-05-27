@@ -1,4 +1,4 @@
-var window = typeof window === "undefined" ? this : window;
+var window = typeof window === 'undefined' ? this : window;
 
 (function (logEnhancer, angular, sprintf, moment) {
 	'use strict';
@@ -63,10 +63,10 @@ var window = typeof window === "undefined" ? this : window;
 	
     run(['$log', 'logEnhancer', function ($log, logEnhancer) {
         if (!sprintf) {
-            $log.warn("sprintf.js not found: https://github.com/alexei/sprintf.js, using fixed layout pattern '%s::[%s]> '");
+            $log.warn('sprintf.js not found: https://github.com/alexei/sprintf.js, using fixed layout pattern "%s::[%s]> "');
         }
         if (!moment) {
-            $log.warn("moment.js not found: http://momentjs.com, using simple Date format");
+            $log.warn('moment.js not found: http://momentjs.com, using simple Date format');
         }
         logEnhancer.enhanceAngularLog($log);
 		$log.info('logging enhancer initiated');

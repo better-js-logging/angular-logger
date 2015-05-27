@@ -72,7 +72,7 @@
 				else {
 					var d = new Date();
 					var timeStr = new Date().toTimeString().match(/^([0-9]{2}:[0-9]{2}:[0-9]{2})/)[0];
-					dateStr = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear() + " " + timeStr;
+					dateStr = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear() + ' ' + timeStr;
 				}
 
 				if (typeof sprintf !== 'undefined') {
@@ -106,11 +106,11 @@
 		};
 	};
 
-	if (typeof window !== "undefined") {
+	if (typeof window !== 'undefined') {
 		window.loggingEnhancer = new LoggingEnhancer(window.sprintf, window.moment);
 	}
 
-	if (typeof exports !== "undefined") {
+	if (typeof exports !== 'undefined') {
 		exports.LoggingEnhancer = LoggingEnhancer;
 	}
 })();
