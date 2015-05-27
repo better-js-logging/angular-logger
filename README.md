@@ -1,4 +1,4 @@
-[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Code Climate][codeclimate-gpa-image]][codeclimate-url] [![Codacy Badge][codacy-image]][codacy-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Code Climate][codeclimate-gpa-image]][codeclimate-url] [![Codacy Badge][codacy-shields-image]][codacy-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 #angular-logger
 
@@ -242,3 +242,4 @@ run(function ($log) {
 
 [codacy-url]: https://www.codacy.com/app/b-bottema/angular-logger
 [codacy-image]: https://www.codacy.com/project/badge/571878304e9b499f8992c908599fcc35
+[codacy-shields-image]: https://img.shields.io/codacy/571878304e9b499f8992c908599fcc35.svg
