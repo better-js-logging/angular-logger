@@ -242,4 +242,4 @@ run(function ($log) {
 
 [codacy-url]: https://www.codacy.com/app/b-bottema/angular-logger
 [codacy-image]: https://www.codacy.com/project/badge/571878304e9b499f8992c908599fcc35
-[codacy-shields-image]: https://img.shields.io/codacy/571878304e9b499f8992c908599fcc35.svg
+[codacy-shields-image]: https://img.shields.io/codacy/571878304e9b499f8992c908599fcc35.svg?style=flat
