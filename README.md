@@ -3,7 +3,7 @@
 #angular-logger
 
 ```javascript
-logEnhancerProvider.loggingPattern = '%s::[%s]>';
+logEnhancerProvider.prefixPattern = '%s::[%s]>';
 logEnhancerProvider.datetimePattern = 'dddd h:mm:ss a';
 logEnhancerProvider.logLevels = {
 	'*': logEnhancerProvider.LEVEL.OFF,
@@ -93,7 +93,7 @@ However, you can change this as follows:
 
 ```javascript
 app.config(function (logEnhancerProvider) {
-   logEnhancerProvider.loggingPattern = '%s - %s: ';
+   logEnhancerProvider.prefixPattern = '%s - %s: ';
 });
 app.run(function($log) {
    $log.getInstance('app').info('Hello World');
@@ -106,11 +106,11 @@ You can also remove it completely, or have just the datetime stamp or just the c
 
 ```javascript
 // by the power of sprintf!
-logEnhancerProvider.loggingPattern = '%s - %s: '; // both
-logEnhancerProvider.loggingPattern = '%s: '; // timestamp
-logEnhancerProvider.loggingPattern = '%1$s: '; // timestamp by index
-logEnhancerProvider.loggingPattern = '%2$s: '; // context by index
-logEnhancerProvider.loggingPattern = '%2$s - %1$s: '; // both, reversed
+logEnhancerProvider.prefixPattern = '%s - %s: '; // both
+logEnhancerProvider.prefixPattern = '%s: '; // timestamp
+logEnhancerProvider.prefixPattern = '%1$s: '; // timestamp by index
+logEnhancerProvider.prefixPattern = '%2$s: '; // context by index
+logEnhancerProvider.prefixPattern = '%2$s - %1$s: '; // both, reversed
 ```
 
 This works, because angular-logger will use two arguments for the prefix, which can be referenced by index.
@@ -207,7 +207,7 @@ Example:
 ```javascript
 // config log levels before the application wakes up
 app.config(function (logEnhancerProvider) {
-    logEnhancerProvider.loggingPattern = '%s::[%s]> ';
+    logEnhancerProvider.prefixPattern = '%s::[%s]> ';
     logEnhancerProvider.logLevels = {
         'a.b.c': logEnhancerProvider.LEVEL.TRACE, // trace + debug + info + warn + error
         'a.b.d': logEnhancerProvider.LEVEL.ERROR, // error

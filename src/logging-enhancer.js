@@ -8,11 +8,11 @@
 		this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 };
 
 		// returns a value for testing purposes only
-		this.enhanceLogging = function(loggingFunc, level, context, config, datetimePattern, datetimeLocale, loggingPattern) {
+		this.enhanceLogging = function(loggingFunc, level, context, config, datetimePattern, datetimeLocale, prefixPattern) {
 			config.logLevels = config.logLevels || [];
 			return function() {
 				if (levelPassesThreshold(context, level, config)) {
-					var enhancedArguments = enhanceLogline(arguments, context, datetimePattern, datetimeLocale, loggingPattern);
+					var enhancedArguments = enhanceLogline(arguments, context, datetimePattern, datetimeLocale, prefixPattern);
 					loggingFunc.apply(null, enhancedArguments);
 					return enhancedArguments;
 				}
@@ -37,8 +37,8 @@
 				}
 			}
 
-			function enhanceLogline(args, context, datetimePattern, datetimeLocale, loggingPattern) {
-				var prefix = generatePrefix(context, datetimePattern, datetimeLocale, loggingPattern);
+			function enhanceLogline(args, context, datetimePattern, datetimeLocale, prefixPattern) {
+				var prefix = generatePrefix(context, datetimePattern, datetimeLocale, prefixPattern);
 				var processedArgs = maybeApplySprintf([].slice.call(args));
 				return [prefix].concat([].slice.call(processedArgs));
 
@@ -64,7 +64,7 @@
 				}
 			}
 
-			function generatePrefix(context, datetimePattern, datetimeLocale, loggingPattern) {
+			function generatePrefix(context, datetimePattern, datetimeLocale, prefixPattern) {
 				var dateStr = '';
 				if (typeof moment !== 'undefined') {
 					dateStr = moment().locale(datetimeLocale).format(datetimePattern);
@@ -76,7 +76,7 @@
 				}
 
 				if (typeof sprintf !== 'undefined') {
-					return sprintf(loggingPattern, dateStr, context);
+					return sprintf(prefixPattern, dateStr, context);
 				}
 				else {
 					// use fixed layout: '%s::[%s]> '
