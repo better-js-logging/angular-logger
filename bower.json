@@ -1,24 +1,22 @@
 {
-  "name": "angular-logger",
+  "name": "better-logging-angular",
   "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/pdorgambide/angular-logger.git"
   },
   "authors": [
-    "pdorgambide"
+    "Benny Bottema (http://blog.projectnibble.org/)"
   ],
-  "main": [
-      "./src/logger.js"
-  ],
+  "main": "./dist/better-logging-angular.min.js",
   "dependencies": {
     "angular": "*",
-    "momentjs": "*",
-    "sprintf": "*"
+    "better-logging-base": "*"
   },
   "keywords": [
     "angular",
-    "logger"
+    "logger",
+    "logging"
   ],
   "license": "MIT",
   "ignore": [
@@ -28,6 +26,9 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-  }
+  "homepage": "https://github.com/better-js-logging/better-logging-angular",
+  "description": "Enhance $log for better logging, including patterns and level management",
+  "moduleType": [
+    "node"
+  ]
 }

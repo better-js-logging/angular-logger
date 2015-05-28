@@ -1,14 +1,14 @@
 {
   "name": "angular-logger",
   "version": "1.0.0",
-  "description": "> Enhanced $log in AngularJS",
+  "description": "> Enhance $log for better logging, including patterns and level management",
   "main": "index.js",
   "scripts": {
     "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pdorgambide/angular-logger"
+    "url": "https://github.com/better-js-logging/better-logging-angular"
   },
   "keywords": [
     "angular",
@@ -27,9 +27,9 @@
   }],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pdorgambide/angular-logger/issues"
+    "url": "https://github.com/better-js-logging/better-logging-angular/issues"
   },
-  "homepage": "https://github.com/pdorgambide/angular-logger",
+  "homepage": "https://github.com/better-js-logging/better-logging-angular",
   "devDependencies": {
     "gulp": "^3.8.11",
     "del": "^1.2.0",
