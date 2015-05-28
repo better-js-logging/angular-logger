@@ -231,15 +231,15 @@ run(function ($log) {
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
 
-[travis-url]: http://travis-ci.org/pdorgambide/angular-logger
-[travis-image]: https://img.shields.io/travis/pdorgambide/angular-logger.svg?style=flat
+[travis-url]: http://travis-ci.org/better-js-logging/better-logging-angular
+[travis-image]: https://img.shields.io/travis/better-js-logging/better-logging-angular.svg?style=flat
 
-[coveralls-url]: https://coveralls.io/r/pdorgambide/angular-logger?branch=master
-[coveralls-image]: https://coveralls.io/repos/pdorgambide/angular-logger/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/r/better-js-logging/better-logging-angular?branch=master
+[coveralls-image]: https://coveralls.io/repos/better-js-logging/better-logging-angular/badge.svg?branch=master
 
-[codeclimate-url]: https://codeclimate.com/github/pdorgambide/angular-logger
-[codeclimate-gpa-image]: https://codeclimate.com/github/pdorgambide/angular-logger/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/better-js-logging/better-logging-angular
+[codeclimate-gpa-image]: https://codeclimate.com/github/better-js-logging/better-logging-angular/badges/gpa.svg
 
-[codacy-url]: https://www.codacy.com/app/b-bottema/angular-logger
-[codacy-image]: https://www.codacy.com/project/badge/571878304e9b499f8992c908599fcc35
-[codacy-shields-image]: https://img.shields.io/codacy/571878304e9b499f8992c908599fcc35.svg?style=flat
+[codacy-url]: https://www.codacy.com/app/b-bottema/better-logging-angular/
+[codacy-image]: https://www.codacy.com/project/badge/a9cc494aacf7473fadcf272d1318ffcd
+[codacy-shields-image]: https://img.shields.io/codacy/a9cc494aacf7473fadcf272d1318ffcd.svg?style=flat
