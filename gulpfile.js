@@ -38,7 +38,7 @@ gulp.task('dist', ['build'], function() {
 
 var testAndGather = lazypipe()
     .pipe(cover.instrument, {
-        pattern: ['src/**/*.js'],
+        pattern: ['dist/angular-logger.js'],
         debugDirectory: 'debug'
     })
     .pipe(jasmine, {
