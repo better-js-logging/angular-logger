@@ -13,7 +13,7 @@ var size = require('gulp-size');
 var source = require('vinyl-source-stream');
 
 gulp.task('clean', function() {
-    del(['dist/*', 'reports', 'debug', '.coverdata']);
+    del(['dist/*', 'reports', 'debug', '.coverdata', '.coverrun']);
 });
 
 gulp.task('browserify', function () {
