@@ -29,6 +29,6 @@
   "homepage": "https://github.com/better-js-logging/better-logging-angular",
   "description": "Enhance $log for better logging, including patterns and level management",
   "moduleType": [
-    "node"
+    "globals"
   ]
 }

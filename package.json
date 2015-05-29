@@ -38,6 +38,11 @@
     "gulp-jasmine": "~2.0.1",
     "gulp-coverage": "~0.3.35",
     "gulp-coveralls": "~0.1.4",
-    "lazypipe": "~0.2.3"
+    "lazypipe": "~0.2.3",
+    "browserify": "10.2.3",
+    "vinyl-transform": "~1.0.0",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "gulp-size": "1.2.1"
   }
 }
