@@ -10,7 +10,6 @@ var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var size = require('gulp-size');
 var source = require('vinyl-source-stream');
-var glob = require('glob');
 
 gulp.task('clean', function() {
     del(['dist/*', 'reports', 'debug', '.coverdata', '.coverrun']);
@@ -31,13 +30,8 @@ gulp.task('build', ['clean', 'browserify'], function() {
 });
 
 gulp.task('plato', ['browserify'], function(done) {
-    var files = glob.sync('debug/**/*.js');
     var plato = require('plato');
-    plato.inspect(files, 'debug/plato', {}, platoCompleted);
-
-    function platoCompleted(report) {
-        console.log(plato.getOverviewReport(report).summary);
-    }
+    plato.inspect('./src/angular-logger.js', 'reports/plato');
 });
 
 gulp.task('dist', ['build'], function() {
@@ -57,7 +51,7 @@ gulp.task('test', ['build'], function() {
     gulp.src('spec/**/*spec.js')
         .pipe(testAndGather())
         .pipe(cover.format(['html']))
-        .pipe(gulp.dest('reports'));
+        .pipe(gulp.dest('reports/coverage'));
 });
 
 gulp.task('travis', ['build'], function() {
