@@ -43,6 +43,7 @@
     "browserify": "10.2.3",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
-    "gulp-size": "1.2.1"
+    "gulp-size": "1.2.1",
+    "gulp-util": "3.0.5"
   }
 }

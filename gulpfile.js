@@ -10,6 +10,7 @@ var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var size = require('gulp-size');
 var source = require('vinyl-source-stream');
+var gutil = require('gulp-util');
 
 gulp.task('clean', function() {
     del(['dist/*', 'reports', 'debug', '.coverdata', '.coverrun']);
@@ -61,5 +62,8 @@ gulp.task('travis', ['build'], function() {
         .pipe(coveralls());
 });
 
-gulp.task('report', ['clean', 'test', 'plato'], function() {});
+// plato doesn't work in default Cloud9 IDE
+gulp.task('report', ['clean', 'test', 'plato'], function() {
+    gutil.log('reports generate in ./reports');
+});
 gulp.task('default', ['report'], function() {});
