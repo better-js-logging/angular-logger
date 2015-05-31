@@ -241,5 +241,5 @@ run(function ($log) {
 [codeclimate-gpa-image]: https://codeclimate.com/github/better-js-logging/angular-logger/badges/gpa.svg
 
 [codacy-url]: https://www.codacy.com/app/b-bottema/angular-logger/dashboard
-[codacy-image]: https://www.codacy.com/project/badge/a9cc494aacf7473fadcf272d1318ffcd
-[codacy-shields-image]: https://img.shields.io/codacy/a9cc494aacf7473fadcf272d1318ffcd.svg?style=flat
+[codacy-image]: https://www.codacy.com/project/badge/9276e78f3ef5436c8fe526e075da0e4c
+[codacy-shields-image]: https://img.shields.io/codacy/9276e78f3ef5436c8fe526e075da0e4c.svg?style=flat
