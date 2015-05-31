@@ -1,4 +1,4 @@
-[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Code Climate][codeclimate-gpa-image]][codeclimate-url] [![Codacy Badge][codacy-shields-image]][codacy-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Code Climate][codeclimate-gpa-image]][codeclimate-url] [![Codacy Badge][codacy-shields-image]][codacy-url] 
 
 #angular-logger
 
@@ -240,6 +240,6 @@ run(function ($log) {
 [codeclimate-url]: https://codeclimate.com/github/better-js-logging/better-logging-angular
 [codeclimate-gpa-image]: https://codeclimate.com/github/better-js-logging/better-logging-angular/badges/gpa.svg
 
-[codacy-url]: https://www.codacy.com/app/b-bottema/better-logging-angular/
+[codacy-url]: https://www.codacy.com/app/b-bottema/better-logging-angular/dashboard
 [codacy-image]: https://www.codacy.com/project/badge/a9cc494aacf7473fadcf272d1318ffcd
 [codacy-shields-image]: https://img.shields.io/codacy/a9cc494aacf7473fadcf272d1318ffcd.svg?style=flat
