@@ -1,3 +1,4 @@
+/* global require */
 var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logging-enhancer.min').LoggingEnhancer;
 
 (function (logEnhancer, angular, sprintf, moment) {
