@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "angular": "1.4.0",
-    "better-logging-base": "*"
+    "better-logging-base": "1.0.0"
   },
   "keywords": [
     "angular",
