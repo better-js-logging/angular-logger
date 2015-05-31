@@ -29,9 +29,9 @@ gulp.task('build', ['clean', 'browserify'], function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('plato', ['browserify'], function(done) {
+gulp.task('plato', function(done) {
     var plato = require('plato');
-    plato.inspect('./src/angular-logger.js', 'reports/plato');
+    plato.inspect('./src/angular-logger.js', 'reports/plato', {}, function(){});
 });
 
 gulp.task('dist', ['build'], function() {
@@ -61,4 +61,5 @@ gulp.task('travis', ['build'], function() {
         .pipe(coveralls());
 });
 
-gulp.task('default', ['test'], function() {});
+gulp.task('report', ['clean', 'test', 'plato'], function() {});
+gulp.task('default', ['report'], function() {});
