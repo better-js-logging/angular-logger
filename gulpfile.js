@@ -11,6 +11,17 @@ var buffer = require('vinyl-buffer');
 var size = require('gulp-size');
 var source = require('vinyl-source-stream');
 var gutil = require('gulp-util');
+var jshint = require('gulp-jshint');
+var plumber = require('gulp-plumber');
+
+// globally handle all missed error events
+var gulp_src = gulp.src;
+gulp.src = function() {
+    return gulp_src.apply(gulp, arguments).pipe(plumber(function(error) {
+        gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
+        this.emit('end');
+    }));
+};
 
 gulp.task('clean', function() {
     del(['dist/*', 'reports', 'debug', '.coverdata', '.coverrun']);
@@ -23,16 +34,18 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest('./debug/'));
 });
 
-gulp.task('build', ['clean', 'browserify'], function() {
+gulp.task('analyse', function() {
+    gulp.src(['./src/angular-logger.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('build', ['clean', 'analyse', 'browserify'], function() {
     return gulp.src(['debug/**/*.js'])
         .pipe(concat("angular-logger.js"))
         .pipe(size('test'))
         .pipe(gulp.dest('dist'));
-});
-
-gulp.task('plato', function(done) {
-    var plato = require('plato');
-    plato.inspect('./src/angular-logger.js', 'reports/plato', {}, function(){});
 });
 
 gulp.task('dist', ['build'], function() {
@@ -62,8 +75,7 @@ gulp.task('travis', ['build'], function() {
         .pipe(coveralls());
 });
 
-// plato doesn't work in default Cloud9 IDE
-gulp.task('report', ['clean', 'test', 'plato'], function() {
-    gutil.log('reports generate in ./reports');
+gulp.task('report', ['clean', 'test'], function() {
+    gutil.log(gutil.colors.green('reports will be generated in ./reports'));
 });
 gulp.task('default', ['report'], function() {});
