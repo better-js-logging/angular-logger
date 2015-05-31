@@ -31,8 +31,13 @@
   },
   "homepage": "https://github.com/better-js-logging/better-logging-angular",
   "devDependencies": {
-    "gulp": "^3.8.11",
     "del": "^1.2.0",
+    "lazypipe": "~0.2.3",
+    "browserify": "10.2.3",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "gulp": "^3.8.11",
+    "gulp-load-plugins": "0.10.0",
     "gulp-plumber": "1.0.1",
     "gulp-jshint": "1.11.0",
     "jshint-stylish": "2.0.0",
@@ -41,11 +46,11 @@
     "gulp-jasmine": "~2.0.1",
     "gulp-coverage": "~0.3.35",
     "gulp-coveralls": "~0.1.4",
-    "lazypipe": "~0.2.3",
-    "browserify": "10.2.3",
-    "vinyl-buffer": "1.0.0",
-    "vinyl-source-stream": "1.1.0",
     "gulp-size": "1.2.1",
     "gulp-util": "3.0.5"
+  },
+  "forLater": {
+    "gulp-jasmine-browser": "0.1.2",
+    "phantomjs": "1.9.17"
   }
 }

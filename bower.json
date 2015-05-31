@@ -10,8 +10,12 @@
   ],
   "main": "./dist/better-logging-angular.min.js",
   "dependencies": {
-    "angular": "*",
-    "better-logging-base": "*"
+    "angular": "*"
+  },
+  "devDependencies": {
+    "angular": "1.4.0",
+    "better-logging-base": "*",
+    "angular-mocks": "1.4.0"
   },
   "keywords": [
     "angular",

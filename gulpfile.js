@@ -1,24 +1,17 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
 var del = require('del');
-var uglify = require('gulp-uglify');
-var jasmine = require('gulp-jasmine');
-var cover = require('gulp-coverage');
-var coveralls = require('gulp-coveralls');
 var lazypipe = require('lazypipe');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
-var size = require('gulp-size');
 var source = require('vinyl-source-stream');
-var gutil = require('gulp-util');
-var jshint = require('gulp-jshint');
-var plumber = require('gulp-plumber');
+
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')();
 
 // globally handle all missed error events
 var gulp_src = gulp.src;
 gulp.src = function() {
-    return gulp_src.apply(gulp, arguments).pipe(plumber(function(error) {
-        gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
+    return gulp_src.apply(gulp, arguments).pipe($.plumber(function(error) {
+        $.util.log($.util.colors.red('Error (' + error.plugin + '): ' + error.message), $.util.colors.red(error.stack));
         this.emit('end');
     }));
 };
@@ -36,46 +29,56 @@ gulp.task('browserify', function() {
 
 gulp.task('analyse', function() {
     gulp.src(['./src/angular-logger.js'])
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(jshint.reporter('fail'));
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('jshint-stylish'))
+        .pipe($.jshint.reporter('fail'));
 });
 
 gulp.task('build', ['clean', 'analyse', 'browserify'], function() {
     return gulp.src(['debug/**/*.js'])
-        .pipe(concat("angular-logger.js"))
-        .pipe(size('test'))
+        .pipe($.concat("angular-logger.js"))
+        .pipe($.size('test'))
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('dist', ['build'], function() {
     return gulp.src(['debug/**/*.js'])
-        .pipe(uglify())
-        .pipe(concat("angular-logger.min.js"))
-        .pipe(size())
+        .pipe($.uglify())
+        .pipe($.concat("angular-logger.min.js"))
+        .pipe($.size())
         .pipe(gulp.dest('dist'));
 });
 
 var testAndGather = lazypipe()
-    .pipe(cover.instrument, { pattern: ['dist/angular-logger.js'], debugDirectory: 'debug' })
-    .pipe(jasmine, { includeStackTrace: true })
-    .pipe(cover.gather);
+    .pipe($.coverage.instrument, { pattern: ['dist/angular-logger.js'], debugDirectory: 'debug' })
+    .pipe($.jasmine, { includeStackTrace: true })
+    .pipe($.coverage.gather);
+
+// gulp.task('test-phantom', ['build'], function() {
+//   return gulp.src(['bower_components/angular/angular.js', 'bower_components/angular-mocks/angular-mocks.js', 'spec/**/*spec.js', 'dist/angular-logger.js'])
+//     .pipe($.coverage.instrument({ pattern: ['dist/angular-logger.js'], debugDirectory: 'debug' }))
+//     .pipe($.jasmineBrowser.specRunner({console: true}))
+//     .pipe($.jasmineBrowser.headless())
+//     .pipe($.coverage.gather())
+//     .pipe($.coverage.format(['html']))
+//     .pipe(gulp.dest('reports/coverage'));
+// });
 
 gulp.task('test', ['build'], function() {
-    gulp.src('spec/**/*spec.js')
+    gulp.src(['spec/**/*spec.js'])
         .pipe(testAndGather())
-        .pipe(cover.format(['html']))
+        .pipe($.coverage.format(['html']))
         .pipe(gulp.dest('reports/coverage'));
 });
 
 gulp.task('travis', ['build'], function() {
     gulp.src('spec/**/*spec.js')
         .pipe(testAndGather())
-        .pipe(cover.format(['lcov']))
-        .pipe(coveralls());
+        .pipe($.coverage.format(['lcov']))
+        .pipe($.coveralls());
 });
 
 gulp.task('report', ['clean', 'test'], function() {
-    gutil.log(gutil.colors.green('reports will be generated in ./reports'));
+    $.util.log($.util.colors.green('reports will be generated in ./reports'));
 });
 gulp.task('default', ['report'], function() {});
