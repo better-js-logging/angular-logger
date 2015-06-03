@@ -23,7 +23,7 @@ $log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-throu
 * Enhances Angular's `$log` service so that you can define **separate contexts** to log for, where the output will be prepended with the context's name and a datetime stamp.
 * Further enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
 * Introduces **log levels**, where you can manage logging output per context or even a group of contexts
-* Works as a **complete drop-in** replacement for your current `$log.log` or `console.log` statements
+* Works as a **complete drop-in** replacement for your current `$log.log` or [`console.log` statements][console-logger]
 * [original post](http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/)
 
 ---
@@ -48,7 +48,7 @@ angular-logger has optional dependencies on _[momentjs](https://github.com/momen
 <a name='bower'/>
 #### Bower
 
-Will be implemented under [issue #10](https://github.com/pdorgambide/angular-logger/issues/10)
+Will be implemented under [issue #1](https://github.com/better-js-logging/angular-logger/issues/1)
 
 <a name='manually'/>
 #### Manually
@@ -243,3 +243,5 @@ run(function ($log) {
 [codacy-url]: https://www.codacy.com/app/b-bottema/angular-logger/dashboard
 [codacy-image]: https://www.codacy.com/project/badge/9276e78f3ef5436c8fe526e075da0e4c
 [codacy-shields-image]: https://img.shields.io/codacy/9276e78f3ef5436c8fe526e075da0e4c.svg?style=flat
+
+[console-logger]: https://github.com/better-js-logging/console-logger/
