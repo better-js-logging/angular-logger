@@ -53,7 +53,7 @@ Will be implemented under [issue #1](https://github.com/better-js-logging/angula
 <a name='manually'/>
 #### Manually
 
-Include _logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app.
+Include _angular-logger.js_, _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_ in your web app.
 
 <a name='getting-started'/>
 ## Getting Started
@@ -140,7 +140,7 @@ This way you can switch to a 24h format this way as well, for example, or use yo
 
 If you have included _sprintf.js_ in your webapp, you can start using patterns with _angular-logger_.
 
-Traditional style with `$log` or `console`:
+Traditional style with `$log`:
 ```javascript
 $log.error ("Error uploading document [" + filename + "], Error: '" + err.message + "'. Try again later.")
 // Error uploading document [contract.pdf], Error: 'Service currently down'. Try again later. "{ ... }"
