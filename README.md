@@ -232,9 +232,9 @@ run(function ($log) {
     $log.logLevels['*'] = $log.LEVEL.OFF;
 });
 
-[WORKING DEMO](https://jsfiddle.net/plantface/nachg4qb/)
-
 ```
+
+[working demo](https://jsfiddle.net/plantface/nachg4qb/)
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
