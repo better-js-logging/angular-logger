@@ -24,12 +24,12 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
 
 					$log.getInstance = function(context) {
 						return {
-							trace	: logEnhancer.enhanceLogging($log.debug, $log.LEVEL.TRACE, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							debug	: logEnhancer.enhanceLogging($log.debug, $log.LEVEL.DEBUG, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							log		: logEnhancer.enhanceLogging($log.log,   $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							info	: logEnhancer.enhanceLogging($log.info,  $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							warn	: logEnhancer.enhanceLogging($log.warn,  $log.LEVEL.WARN,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							error	: logEnhancer.enhanceLogging($log.error, $log.LEVEL.ERROR, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern)
+							trace	: logEnhancer.enhanceLogging($log.$$orig$log.debug, $log.LEVEL.TRACE, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+							debug	: logEnhancer.enhanceLogging($log.$$orig$log.debug, $log.LEVEL.DEBUG, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+							log		: logEnhancer.enhanceLogging($log.$$orig$log.log,   $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+							info	: logEnhancer.enhanceLogging($log.$$orig$log.info,  $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+							warn	: logEnhancer.enhanceLogging($log.$$orig$log.warn,  $log.LEVEL.WARN,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+							error	: logEnhancer.enhanceLogging($log.$$orig$log.error, $log.LEVEL.ERROR, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern)
 						};
 					};
 				}
@@ -57,6 +57,21 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
             };
         */
     }]).
+    
+    config(["$provide", "logEnhancerProvider", function ($provide, p) {
+		$provide.decorator("$log", ['$delegate', function ($delegate) {
+			return {
+			    // keep original methods, otherwise the enhanced functions on .getInstance() will have a double (global context) prefix
+			    $$orig$log: angular.extend({}, $delegate),
+    			trace	: logEnhancer.enhanceLogging($delegate.debug, p.LEVEL.TRACE, 'global', $delegate, p.datetimePattern, p.datetimeLocale, p.prefixPattern),
+    			debug	: logEnhancer.enhanceLogging($delegate.debug, p.LEVEL.DEBUG, 'global', $delegate, p.datetimePattern, p.datetimeLocale, p.prefixPattern),
+    			log		: logEnhancer.enhanceLogging($delegate.log,   p.LEVEL.INFO,  'global', $delegate, p.datetimePattern, p.datetimeLocale, p.prefixPattern),
+    			info	: logEnhancer.enhanceLogging($delegate.info,  p.LEVEL.INFO,  'global', $delegate, p.datetimePattern, p.datetimeLocale, p.prefixPattern),
+    			warn	: logEnhancer.enhanceLogging($delegate.warn,  p.LEVEL.WARN,  'global', $delegate, p.datetimePattern, p.datetimeLocale, p.prefixPattern),
+    			error	: logEnhancer.enhanceLogging($delegate.error, p.LEVEL.ERROR, 'global', $delegate, p.datetimePattern, p.datetimeLocale, p.prefixPattern)
+			};
+		}]);
+	}]).
 	
     run(['$log', 'logEnhancer', function ($log, logEnhancer) {
         if (!sprintf) {

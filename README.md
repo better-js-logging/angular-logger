@@ -20,14 +20,7 @@ $log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-throu
 
 ---
 
-* Enhances Angular's `$log` service so that you can define **separate contexts** to log for, where the output will be prepended with the context's name and a datetime stamp.
-* Further enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
-* Introduces **log levels**, where you can manage logging output per context or even a group of contexts
-* Works as a **complete drop-in** replacement for your current `$log.log` or [`console.log` statements][console-logger]
-* [original post](http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/)
-
----
-
+- [About](#about)
 - [Installing](#installing)
 		- [Bower](#bower)
 		- [Manually](#manually)
@@ -37,8 +30,17 @@ $log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-throu
 		- [Datetime stamp patterns](#datetime-stamp-patterns)
 		- [Logging patterns](#logging-patterns)
 - [Managing logging priority](#managing-logging-priority)
-
+- 
 ---
+
+<a name='about'/>
+## About
+
+* Enhances Angular's `$log` service so that you can define **separate contexts** to log for, where the output will be prepended with the context's name and a datetime stamp.
+* Further enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
+* Introduces **log levels**, where you can manage logging output per context or even a group of contexts
+* Works as a **complete drop-in** replacement for your current `$log.log` or [`console.log` statements][console-logger]
+* [original post](http://blog.projectnibble.org/2013/12/23/enhance-logging-in-angularjs-the-simple-way/)
 
 <a name='installing'/>
 ## Installing
