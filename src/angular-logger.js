@@ -4,7 +4,7 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
 (function (logEnhancer, angular, sprintf, moment) {
 	'use strict';
 
-	angular.module('logger', []).
+	angular.module('angular-logger', []).
 	provider('logEnhancer', function() {
 		var provider = this;
 
