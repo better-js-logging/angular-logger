@@ -32,7 +32,7 @@ $log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-throu
 		- [Datetime stamp patterns](#datetime-stamp-patterns)
 		- [Logging patterns](#logging-patterns)
 - [Managing logging priority](#managing-logging-priority)
-- 
+
 ---
 
 <a name='about'/>
