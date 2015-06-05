@@ -18,6 +18,8 @@ $log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-throu
 // 17-5-2015 11:53:51::[main.subB]> Hello World! Object { "extra": "pass-through params"}
 ```
 
+[WORKING DEMO](https://jsfiddle.net/plantface/nachg4qb/)
+
 ---
 
 - [About](#about)
@@ -80,7 +82,8 @@ Include _angular-logger.js_, _[momentjs](https://github.com/moment/moment)_ and 
       }
    });
    ```
-   [working demo](http://jsfiddle.net/plantface/d7qkaumr/)
+
+ [working demo](https://jsfiddle.net/plantface/6jmtf2or/)
 
 <a name='applying-patterns'/>
 ## Applying Patterns
@@ -228,6 +231,9 @@ run(function ($log) {
     $log.logLevels['a.b.c'] = $log.LEVEL.ERROR;
     $log.logLevels['*'] = $log.LEVEL.OFF;
 });
+
+[WORKING DEMO](https://jsfiddle.net/plantface/nachg4qb/)
+
 ```
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
