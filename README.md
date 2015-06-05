@@ -18,7 +18,7 @@ $log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-throu
 // 17-5-2015 11:53:51::[main.subB]> Hello World! Object { "extra": "pass-through params"}
 ```
 
-[WORKING DEMO](https://jsfiddle.net/plantface/nachg4qb/)
+###[WORKING DEMO](https://jsfiddle.net/plantface/nachg4qb/)
 
 ---
 
