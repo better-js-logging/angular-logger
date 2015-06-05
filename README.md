@@ -38,6 +38,8 @@ $log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-throu
 <a name='about'/>
 ## About
 
+This library enhances `$log`'s logging capabilities. It works by modifying the arguments going into the original functions. Although you can configure patterns and logging level priorities, it also simply works as a simple drop-in ([demo](https://jsfiddle.net/plantface/b0v0s2rg/)).
+
 * Enhances Angular's `$log` service so that you can define **separate contexts** to log for, where the output will be prepended with the context's name and a datetime stamp.
 * Further enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
 * Introduces **log levels**, where you can manage logging output per context or even a group of contexts
