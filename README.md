@@ -67,7 +67,7 @@ Include _angular-logger.js_, _[momentjs](https://github.com/moment/moment)_ and 
 1. After installing, add `logger` module as a dependency to your module:
 
    ```javascript
-   angular.module('YourModule', ['logger'])
+   angular.module('YourModule', ['angular-logger'])
    ```
 2. Start logging for your context
 
