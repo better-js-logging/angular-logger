@@ -54,7 +54,9 @@ angular-logger has optional dependencies on _[momentjs](https://github.com/momen
 <a name='bower'/>
 #### Bower
 
+```
 bower install angular-logger --save
+```
 
 <a name='manually'/>
 #### Manually
