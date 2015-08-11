@@ -54,7 +54,7 @@ angular-logger has optional dependencies on _[momentjs](https://github.com/momen
 <a name='bower'/>
 #### Bower
 
-Will be implemented under [issue #1](https://github.com/better-js-logging/angular-logger/issues/1)
+bower install angular-logger --save
 
 <a name='manually'/>
 #### Manually
@@ -64,7 +64,7 @@ Include _angular-logger.js_, _[momentjs](https://github.com/moment/moment)_ and 
 <a name='getting-started'/>
 ## Getting Started
 
-1. After installing, add `logger` module as a dependency to your module:
+1. After installing, add the `angular-logger` module as a dependency to your module:
 
    ```javascript
    angular.module('YourModule', ['angular-logger'])
@@ -120,12 +120,12 @@ logEnhancerProvider.prefixPattern = '%2$s: '; // context by index
 logEnhancerProvider.prefixPattern = '%2$s - %1$s: '; // both, reversed
 ```
 
-This works, because angular-logger will use two arguments for the prefix, which can be referenced by index.
+This works because angular-logger will use two arguments context and timestamp for the prefix, which can be referenced by index.
 
 <a name='datetime-stamp-patterns'/>
 #### Datetime stamp patterns
 
-If you have included _moment.js_ in your webapp, you can start using datetime stamp patterns with angular-logger. The default pattern is `dddd h:mm:ss a`, which translates to _Sunday 12:55:07 am_. You customize the pattern as follows:
+If you have included _moment.js_ in your webapp, you can start using datetime stamp patterns with angular-logger. The default pattern is `LLL`, which translates to a localized string that matches the current user's Locale. You customize the pattern as follows:
 
 ```javascript
 app.config(function (logEnhancerProvider) {
@@ -138,7 +138,7 @@ app.run(function($log) {
 // became: Sunday::[app]>Hello World
 ```
 
-This way you can switch to a 24h format this way as well, for example, or use your locale-specific format.
+A pattern like `try dddd h:mm:ss a` would translate to something like "Sunday 12:55:07 am". You can easily switch to a 24h format as well, using these patterns.
 
  * For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)
 
@@ -186,7 +186,7 @@ logger.warn("Or combine all!: %s, %j", JSON.stringify(obj), obj, obj);
 
 Using logging levels, we can manage output on several levels. Contexts can be named using dot '.' notation, where the names before dots are intepreted as groups or packages.
 
-For example for `'a.b'` and `a.c` we can define a general log level for `a` and have a different log level for only 'a.c'.
+For example for `a.b` and `a.c` we can define a general log level for `a` and have a different log level for only `a.c`.
 
 The following logging functions (left side) are available:
 
