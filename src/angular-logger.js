@@ -58,8 +58,8 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
         */
     }]).
     
-    config(["$provide", "logEnhancerProvider", function ($provide, p) {
-		$provide.decorator("$log", ['$delegate', function ($delegate) {
+    config(['$provide', 'logEnhancerProvider', function ($provide, p) {
+		$provide.decorator('$log', ['$delegate', function ($delegate) {
 			return {
 			    // keep original methods, otherwise the enhanced functions on .getInstance() will have a double (global context) prefix
 			    $$orig$log: angular.extend({}, $delegate),
