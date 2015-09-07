@@ -140,7 +140,7 @@ app.run(function($log) {
 // became: Sunday::[app]>Hello World
 ```
 
-A pattern like `try dddd h:mm:ss a` would translate to something like "Sunday 12:55:07 am". You can easily switch to a 24h format as well, using these patterns.
+A pattern like `dddd h:mm:ss a` would translate to something like "Sunday 12:55:07 am". You can easily switch to a 24h format as well, using these patterns.
 
  * For all options, see [moment.js](http://momentjs.com/docs/#/displaying/)
 
