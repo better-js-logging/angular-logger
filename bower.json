@@ -10,11 +10,13 @@
   ],
   "main": "./dist/angular-logger.min.js",
   "dependencies": {
-    "angular": "*"
+    "angular": "*",
+    "momentjs": "*",
+    "sprintf": "*"
   },
   "devDependencies": {
     "angular": "1.4.0",
-    "better-logging-base": "1.0.1"
+    "better-logging-base": "1.0.0"
   },
   "keywords": [
     "angular",
