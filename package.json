@@ -1,6 +1,6 @@
 {
   "name": "angular-logger",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "> Enhance $log for better logging, including patterns and level management",
   "main": "angular-logger.min.js",
   "scripts": {
@@ -21,11 +21,13 @@
     "name": "Benny Bottema",
     "url": "http://blog.projectnibble.org"
   },
-  "contributors": [{
-    "name": "Pablo Dorgambide",
-    "email": "pdorgambide@qualigy.com",
-    "url": "http://www.qualigy.com"
-  }],
+  "contributors": [
+    {
+      "name": "Pablo Dorgambide",
+      "email": "pdorgambide@qualigy.com",
+      "url": "http://www.qualigy.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/better-js-logging/angular-logger/issues"
