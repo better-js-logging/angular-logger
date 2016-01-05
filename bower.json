@@ -11,7 +11,7 @@
   "main": "./dist/angular-logger.min.js",
   "dependencies": {
     "angular": "*",
-    "momentjs": "*",
+    "moment": "*",
     "sprintf": "*"
   },
   "devDependencies": {
