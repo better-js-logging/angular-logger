@@ -1,6 +1,6 @@
 {
   "name": "angular-logger",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "> Enhance $log for better logging, including patterns and level management",
   "main": "angular-logger.min.js",
   "scripts": {
