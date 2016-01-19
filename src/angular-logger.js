@@ -26,7 +26,7 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
 					error	: logEnhancer.enhanceLogging($log.$$orig$log.error, $log.LEVEL.ERROR, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern)
 				};
 			};
-		}
+		};
 
 		this.$get = function() {
 			return {
