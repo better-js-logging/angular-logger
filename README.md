@@ -97,9 +97,9 @@ Include _angular-logger.js_, _[momentjs](https://github.com/moment/moment)_ and 
 By default, the prefix is formatted like so (if sprintf.js is present):
 
 ```javascript
-datetime here::[context's name here]>your logging input here
+datetime here::[context name here]>your logging input here
 // if sprintf.js is missing, angular-logger defaults back to a fixed pattern that does include the used loglevel
-// datetime here::context's name here::loglevel used here>your logging input here 
+// datetime here::context name here::loglevel used here>your logging input here 
 ```
 
 However, you can change this as follows:
