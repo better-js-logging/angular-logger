@@ -15,6 +15,20 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
         this.LEVEL = logEnhancer.LEVEL;             // with these configure loglevels in config fase
         this.logLevels = {'*': this.LEVEL.TRACE}; 	// everything by everyone should be visible by default
 
+		// instanceFactoryFactory moved here for modding purposes; now you can repurpose all the logging functions after they are enhanced
+		this.instanceFactoryFactory = function($log) {
+			return function(context) {
+				return {
+					trace	: logEnhancer.enhanceLogging($log.$$orig$log.debug, $log.LEVEL.TRACE, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+					debug	: logEnhancer.enhanceLogging($log.$$orig$log.debug, $log.LEVEL.DEBUG, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+					log		: logEnhancer.enhanceLogging($log.$$orig$log.log,   $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+					info	: logEnhancer.enhanceLogging($log.$$orig$log.info,  $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+					warn	: logEnhancer.enhanceLogging($log.$$orig$log.warn,  $log.LEVEL.WARN,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
+					error	: logEnhancer.enhanceLogging($log.$$orig$log.error, $log.LEVEL.ERROR, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern)
+				};
+			};
+		}
+
 		this.$get = function() {
 			return {
 
@@ -23,16 +37,7 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
 					$log.LEVEL = provider.LEVEL; // assign to $log, so the user can change them after config phase
 					$log.logLevels = provider.logLevels; // assign to $log, so the user can change them after config phase
 
-					$log.getInstance = function(context) {
-						return {
-							trace	: logEnhancer.enhanceLogging($log.$$orig$log.debug, $log.LEVEL.TRACE, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							debug	: logEnhancer.enhanceLogging($log.$$orig$log.debug, $log.LEVEL.DEBUG, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							log		: logEnhancer.enhanceLogging($log.$$orig$log.log,   $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							info	: logEnhancer.enhanceLogging($log.$$orig$log.info,  $log.LEVEL.INFO,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							warn	: logEnhancer.enhanceLogging($log.$$orig$log.warn,  $log.LEVEL.WARN,  context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern),
-							error	: logEnhancer.enhanceLogging($log.$$orig$log.error, $log.LEVEL.ERROR, context, $log, provider.datetimePattern, provider.datetimeLocale, provider.prefixPattern)
-						};
-					};
+					$log.getInstance = provider.instanceFactoryFactory($log);
 				}
 			};
 		};
