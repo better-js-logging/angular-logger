@@ -40,7 +40,7 @@ $log.getInstance('main.subB').info('Hello %s!', 'World', { 'extra': ['pass-throu
 
 This library enhances `$log`'s logging capabilities. It works by modifying the arguments going into the original functions. Although you can configure patterns and logging level priorities, it also simply works as a simple drop-in ([demo](https://jsfiddle.net/plantface/b0v0s2rg/)).
 
-* Enhances Angular's `$log` service so that you can define **separate contexts** to log for, where the output will be prepended with the context's name and a datetime stamp.
+* Enhances Angular's `$log` service so that you can define **separate contexts** to log for, where the output will be prepended with the context's name, a datetime stamp and can be furter expanded to include the logging level.
 * Further enhances the logging functions so that you can **apply patterns** eliminatinging the need of manually concatenating your strings
 * Introduces **log levels**, where you can manage logging output per context or even a group of contexts
 * Works as a **complete drop-in** replacement for your current `$log.log` or [`console.log` statements][console-logger]
@@ -94,9 +94,13 @@ Include _angular-logger.js_, _[momentjs](https://github.com/moment/moment)_ and 
 <a name='prefix-pattern'/>
 #### Prefix pattern
 
-By default, the prefix is formatted like so:
+By default, the prefix is formatted like so (if sprintf.js is present):
 
-`datetime here::[context's name here]>your logging input here`
+```javascript
+datetime here::[context's name here]>your logging input here
+// if sprintf.js is missing, angular-logger defaults back to a fixed pattern that does include the used loglevel
+// datetime here::context's name here::loglevel used here>your logging input here 
+```
 
 However, you can change this as follows:
 
@@ -111,6 +115,12 @@ app.run(function($log) {
 // became: Sunday 12:55:07 am - app: Hello World
 ```
 
+And if you add another prefix-placeholder `%s`, you get the log level as well:
+
+```javascript
+logEnhancerProvider.prefixPattern = '%s - %s - %s: '; // Sunday 12:55:07 am - app - info: Hello World
+```
+
 You can also remove it completely, or have just the datetime stamp or just the context prefixed:
 
 ```javascript
@@ -120,9 +130,11 @@ logEnhancerProvider.prefixPattern = '%s: '; // timestamp
 logEnhancerProvider.prefixPattern = '%1$s: '; // timestamp by index
 logEnhancerProvider.prefixPattern = '%2$s: '; // context by index
 logEnhancerProvider.prefixPattern = '%2$s - %1$s: '; // both, reversed
+logEnhancerProvider.prefixPattern = '%3$s: '; // logging level by index
+logEnhancerProvider.prefixPattern = '%3$s - %2$s - %1$s: '; // loglevel, context and timestamp reversed
 ```
 
-This works because angular-logger will use two arguments context and timestamp for the prefix, which can be referenced by index.
+This works because angular-logger will use three arguments context, timestamp and loglevel for the prefix, which can be referenced by index.
 
 <a name='datetime-stamp-patterns'/>
 #### Datetime stamp patterns
