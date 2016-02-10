@@ -87,6 +87,5 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
             $log.warn('moment.js not found: http://momentjs.com, using non-localized simple Date format');
         }
         logEnhancer.enhanceAngularLog($log);
-		$log.info('logging enhancer initiated');
     }]);
 }(new LoggingEnhancer(window.sprintf, window.moment), window.angular, window.sprintf, window.moment));
