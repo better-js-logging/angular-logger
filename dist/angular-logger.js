@@ -1,6 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /* global require */
-var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logging-enhancer.min').LoggingEnhancer;
+var LoggingEnhancer = require('better-logging-base').LoggingEnhancer;
 
 (function (logEnhancer, angular, sprintf, moment) {
 	'use strict';
@@ -92,6 +92,134 @@ var LoggingEnhancer = require('../bower_components/better-logging-base/dist/logg
     }]);
 }(new LoggingEnhancer(window.sprintf, window.moment), window.angular, window.sprintf, window.moment));
 
-},{"../bower_components/better-logging-base/dist/logging-enhancer.min":2}],2:[function(require,module,exports){
-!function(){"use strict";var e=function(e,n){var t=this;this.LEVEL={TRACE:4,DEBUG:3,INFO:2,WARN:1,ERROR:0,OFF:-1},this.enhanceLogging=function(o,r,i,f,u,l,a){function s(e,n,o){function r(e,n){if(e){if(void 0!==n.logLevels[e])return n.logLevels[e];if(-1!==e.indexOf("."))return r(e.substring(0,e.lastIndexOf(".")),n)}return void 0!==n.logLevels["*"]?n.logLevels["*"]:t.LEVEL.TRACE}return n>t.LEVEL.OFF&&n<=r(e,o)}function c(n,o,r,i,f,u){function l(n){var o="undefined"!=typeof e,r=o&&n.length>=2&&"string"==typeof n[0]&&-1!==n[0].indexOf("%");if(r)try{var i=t.countSprintfHolders(n[0]);i>0&&(n[0]=e.apply(null,n),n.splice(1,i))}catch(f){n.unshift(f)}return n}var a=d(o,r,i,f,u),s=l([].slice.call(n));return[a].concat([].slice.call(s))}function d(o,r,i,f,u){var l="";if("undefined"!=typeof n)l=n().locale(f).format(i);else{var a=new Date,s=(new Date).toTimeString().match(/^([0-9]{2}:[0-9]{2}:[0-9]{2})/)[0];l=a.getDate()+"-"+(a.getMonth()+1)+"-"+a.getFullYear()+" "+s}for(var c in t.LEVEL)if(t.LEVEL[c]===r)break;return c=c.toLowerCase(),"undefined"!=typeof e?e(u,l,o,c):l+"::"+o+"::"+c+"> "}return f.logLevels=f.logLevels||[],function(){if(s(i,r,f)){var e=c(arguments,i,r,u,l,a);return o.apply(null,e),e}return null}},t.countSprintfHolders=function(n){function t(e){return function(){r=Math.max(r,e)}}var o=/\x25\([a-zA-Z0-9_]+\)[b-fijosuxX]/.test(n);if(o)return 1;var r=0;return e(n,t(1),t(2),t(3),t(4),t(5),t(6),t(7),t(8),t(9),t(10)),r}};if("undefined"!=typeof module)module.exports.LoggingEnhancer=e;else if("undefined"!=typeof exports)exports.LoggingEnhancer=e;else{if("undefined"==typeof window)throw new Error("unable to expose LoggingEnhancer: no module, exports object and no global window detected");window.loggingEnhancer=new e(window.sprintf,window.moment)}}();
+},{"better-logging-base":2}],2:[function(require,module,exports){
+/* global module, exports, window */
+
+/*
+	LoggingEnhancer can be used to enhance any logging function and can be tested without angular
+*/
+(function() {
+	
+	'use strict';
+
+	var LoggingEnhancer = function(sprintf, moment) {
+		var self = this;
+
+		this.LEVEL = { TRACE: 4, DEBUG: 3, INFO: 2, WARN: 1, ERROR: 0, OFF: -1 };
+
+		// returns a value for testing purposes only
+		this.enhanceLogging = function(loggingFunc, level, context, config, datetimePattern, datetimeLocale, prefixPattern) {
+			config.logLevels = config.logLevels || [];
+			return function() {
+				if (levelPassesThreshold(context, level, config)) {
+					var enhancedArguments = enhanceLogline(arguments, context, level, datetimePattern, datetimeLocale, prefixPattern);
+					loggingFunc.apply(null, enhancedArguments);
+					return enhancedArguments;
+				}
+				else {
+					return null; // no log produced
+				}
+			};
+
+			function levelPassesThreshold(context, level, config) {
+				return level > self.LEVEL.OFF && level <= getLogLevelThreshold(context, config);
+
+				function getLogLevelThreshold(context, config) {
+					if (context) {
+						if (config.logLevels[context] !== undefined) {
+							return config.logLevels[context];
+						}
+						else if (context.indexOf('.') !== -1) {
+							return getLogLevelThreshold(context.substring(0, context.lastIndexOf('.')), config);
+						}
+					}
+					return config.logLevels['*'] !== undefined ? config.logLevels['*'] : self.LEVEL.TRACE;
+				}
+			}
+
+			function enhanceLogline(args, context, level, datetimePattern, datetimeLocale, prefixPattern) {
+				var prefix = generatePrefix(context, level, datetimePattern, datetimeLocale, prefixPattern);
+				var processedArgs = maybeApplySprintf([].slice.call(args));
+				return [prefix].concat([].slice.call(processedArgs));
+
+				function maybeApplySprintf(args) {
+					var sprintfAvailable = typeof sprintf !== 'undefined';
+					var sprintfCandidate = sprintfAvailable && args.length >= 2 && typeof args[0] === 'string' && args[0].indexOf('%') !== -1;
+					if (sprintfCandidate) {
+						try {
+							// apply sprintf with the proper arguments
+							var placeholderCount = self.countSprintfHolders(args[0]);
+							if (placeholderCount > 0) {
+								args[0] = sprintf.apply(null, args);
+								args.splice(1, placeholderCount); // remove arguments consumed by sprintf
+							}
+						}
+						catch (e) {
+							// invalid arguments passed into sprintf, continue without applying
+							args.unshift(e);
+						}
+					}
+
+					return args;
+				}
+			}
+
+			function generatePrefix(context, level, datetimePattern, datetimeLocale, prefixPattern) {
+				var dateStr = '';
+				if (typeof moment !== 'undefined') {
+					dateStr = moment().locale(datetimeLocale).format(datetimePattern);
+				}
+				else {
+					var d = new Date();
+					var timeStr = new Date().toTimeString().match(/^([0-9]{2}:[0-9]{2}:[0-9]{2})/)[0];
+					dateStr = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear() + ' ' + timeStr;
+				}
+				
+				for (var levelName in self.LEVEL) {
+					if (self.LEVEL[levelName] === level) { break; }
+				}
+				levelName = levelName.toLowerCase();
+
+				if (typeof sprintf !== 'undefined') {
+					return sprintf(prefixPattern, dateStr, context, levelName);
+				}
+				else {
+					// use fixed layout: '%s::[%s]%s> '
+					return dateStr + '::' + context + '::' + levelName + '> ';
+				}
+			}
+		};
+
+		self.countSprintfHolders = function(pattern) {
+			var hasNamedHolders = /\x25\([a-zA-Z0-9_]+\)[b-fijosuxX]/.test(pattern);
+			if (hasNamedHolders) {
+				return 1;
+			}
+
+			var placeholderCounter = 0;
+
+			function f(index) {
+				return function() {
+					// keep track of highest arg index, needed for single -but indexed- placeholders placeholder (ie. %6$s consumes the first 6 arguments)
+					placeholderCounter = Math.max(placeholderCounter, index);
+				};
+			}
+
+			sprintf(pattern, f(1), f(2), f(3), f(4), f(5), f(6), f(7), f(8), f(9), f(10));
+			return placeholderCounter;
+		};
+	};
+
+	if (typeof module !== 'undefined') {
+		module.exports.LoggingEnhancer = LoggingEnhancer;
+	} else if (typeof exports !== 'undefined') {
+		exports.LoggingEnhancer = LoggingEnhancer;
+	} else if (typeof window !== 'undefined') {
+		window.loggingEnhancer = new LoggingEnhancer(window.sprintf, window.moment);
+	} else {
+		throw new Error('unable to expose LoggingEnhancer: no module, exports object and no global window detected');
+	}
+	
+})();
+
 },{}]},{},[1]);
