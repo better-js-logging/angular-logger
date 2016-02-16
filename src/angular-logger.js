@@ -1,6 +1,10 @@
 /* global require */
 var LoggingEnhancer = require('better-logging-base').LoggingEnhancer;
 
+var sprintf = (window.sprintf && window.sprintf.sprintf) || window.sprintf; // depending on sprintf version
+var moment = window.moment;
+var angular = window.angular;
+
 (function (logEnhancer, angular, sprintf, moment) {
 	'use strict';
 
@@ -89,4 +93,4 @@ var LoggingEnhancer = require('better-logging-base').LoggingEnhancer;
         logEnhancer.enhanceAngularLog($log);
 		$log.info('logging enhancer initiated');
     }]);
-}(new LoggingEnhancer(window.sprintf, window.moment), window.angular, window.sprintf, window.moment));
+}(new LoggingEnhancer(sprintf, moment), angular, sprintf, moment));
