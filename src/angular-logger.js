@@ -1,8 +1,11 @@
 /* global require */
 var LoggingEnhancer = require('better-logging-base').LoggingEnhancer;
+var sprintf = require('sprintf-js');
+var moment = require('moment');
 
-var sprintf = (window.sprintf && window.sprintf.sprintf) || window.sprintf; // depending on sprintf version
-var moment = window.moment;
+// depending on sprintf availability *and* version if available
+sprintf = (sprintf && sprintf.sprintf) || (window.sprintf && window.sprintf.sprintf) || window.sprintf;
+moment = moment || window.moment;
 var angular = window.angular;
 
 (function (logEnhancer, angular, sprintf, moment) {

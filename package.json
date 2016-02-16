@@ -57,7 +57,7 @@
   "dependencies": {
     "angular": "1.x.x",
     "moment": "*",
-    "sprintf": "*"
+    "sprintf-js": "*"
   },
   "forLater": {
     "gulp-jasmine-browser": "0.1.2",
