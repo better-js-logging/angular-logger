@@ -2,7 +2,7 @@
   "name": "angular-logger",
   "version": "1.2.3",
   "description": "> Enhance $log for better logging, including patterns and level management",
-  "main": "dist/angular-logger.min.js",
+  "main": "src/angular-logger.js",
   "scripts": {
     "test": "gulp test"
   },
