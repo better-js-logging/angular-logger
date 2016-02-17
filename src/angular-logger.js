@@ -94,6 +94,5 @@ var angular = window.angular;
             $log.warn('moment.js not found: http://momentjs.com, using non-localized simple Date format');
         }
         logEnhancer.enhanceAngularLog($log);
-		$log.info('logging enhancer initiated');
     }]);
 }(new LoggingEnhancer(sprintf, moment), angular, sprintf, moment));
