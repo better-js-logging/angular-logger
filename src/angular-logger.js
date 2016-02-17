@@ -87,12 +87,12 @@ var angular = window.angular;
 	}]).
 	
     run(['$log', 'logEnhancer', function ($log, logEnhancer) {
+        logEnhancer.enhanceAngularLog($log);
         if (!sprintf) {
             $log.warn('sprintf.js not found: https://github.com/alexei/sprintf.js, using fixed layout pattern "%s::[%s]> "');
         }
         if (!moment) {
             $log.warn('moment.js not found: http://momentjs.com, using non-localized simple Date format');
         }
-        logEnhancer.enhanceAngularLog($log);
     }]);
 }(new LoggingEnhancer(sprintf, moment), angular, sprintf, moment));
