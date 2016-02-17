@@ -52,10 +52,11 @@ This library enhances `$log`'s logging capabilities. It works by modifying the a
 angular-logger has optional dependencies on _[momentjs](https://github.com/moment/moment)_ and _[sprintf.js](https://github.com/alexei/sprintf.js)_: without moment you can't pattern a nicely readable datetime stamp and without sprintf you can't pattern your logging input lines. Default fixed patterns are applied if either they are missing.
 
 <a name='bower'/>
-#### Bower
+#### Bower / NPM
 
 ```
 bower install angular-logger --save
+npm install angular-logger --save
 ```
 
 <a name='manually'/>
