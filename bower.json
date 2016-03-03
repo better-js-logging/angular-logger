@@ -1,0 +1,33 @@
+{
+    "name": "angular-logger",
+    "main": "dist/angular-logger.js",
+    "version": "1.3.1",
+    "homepage": "https://github.com/better-js-logging/angular-logger",
+    "authors": [
+        "Benny Bottema <b.bottema@projectnibble.org>",
+        "Pablo Dorgambide <pdorgambide@qualigy.com>"
+    ],
+    "description": "> Enhance $log for better logging, including patterns and level management",
+    "license": "MIT",
+    "keywords": [
+        "angular",
+        "logger",
+        "logging",
+        "angular-logger",
+        "$log"
+    ]
+    "ignore": [
+        "bower_components",
+        "node_modules",
+        "src",
+        "spec",
+        ".codeclimate.yml",
+        ".coveralls.yml",
+        ".gitignore",
+        ".jshintrc",
+        ".travis.yml",
+        "enhanced-logging.png",
+        "gulpfile.js",
+        "package.json",
+    ]
+}
