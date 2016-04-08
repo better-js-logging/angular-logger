@@ -15,7 +15,7 @@
         "logging",
         "angular-logger",
         "$log"
-    ]
+    ],
     "ignore": [
         "bower_components",
         "node_modules",
