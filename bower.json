@@ -15,7 +15,7 @@
         "logging",
         "angular-logger",
         "$log"
-    ]
+    ],
     "ignore": [
         "bower_components",
         "node_modules",
@@ -28,6 +28,6 @@
         ".travis.yml",
         "enhanced-logging.png",
         "gulpfile.js",
-        "package.json",
+        "package.json"
     ]
 }
