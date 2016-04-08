@@ -28,6 +28,6 @@
         ".travis.yml",
         "enhanced-logging.png",
         "gulpfile.js",
-        "package.json",
+        "package.json"
     ]
 }
