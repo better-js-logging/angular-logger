@@ -51,16 +51,12 @@
     "gulp-coverage": "~0.3.35",
     "gulp-coveralls": "~0.1.4",
     "gulp-size": "1.2.1",
-    "gulp-util": "3.0.5",
-    "better-logging-base": "latest"
+    "gulp-util": "3.0.5"
   },
   "dependencies": {
+    "better-logging-base": "latest",
     "angular": "1.x.x",
     "moment": "*",
     "sprintf-js": "*"
-  },
-  "forLater": {
-    "gulp-jasmine-browser": "0.1.2",
-    "phantomjs": "1.9.17"
   }
 }
