@@ -191,6 +191,9 @@ logger.warn("Do it yourself: " + JSON.stringify(obj)); // json string with strin
 logger.warn("Let sprintf handle it: %j", obj); // json string with sprintf's limitations
 logger.warn("Let the browser handle it: ", obj); // interactive tree in the browser with syntax highlighting
 logger.warn("Or combine all!: %s, %j", JSON.stringify(obj), obj, obj);
+
+logger.info("What about %s?", function() { return "functions"; });
+logger.info("What about delaying creating objects until %j?", function() { return {n:"needed"}; });
  ```
 
  * For all options, see [sprintf.js](https://github.com/alexei/sprintf.js)
