@@ -1,4 +1,4 @@
-[angular-logger2 released for Angular2+](https://github.com/better-js-logging/angular-logger2)!
+## [angular-logger2 released for Angular2+](https://github.com/better-js-logging/angular-logger2)!
 
 [![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Code Climate][codeclimate-gpa-image]][codeclimate-url] [![Codacy Badge][codacy-shields-image]][codacy-url] 
 
